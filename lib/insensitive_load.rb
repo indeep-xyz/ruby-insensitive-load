@@ -1,5 +1,10 @@
 require "insensitive_load/version"
+require "insensitive_load/list"
 
 module InsensitiveLoad
-  # Your code goes here...
+  class << self
+    def glob(path_src)
+      List.glob(path_src)
+    end
+  end
 end
