@@ -2,8 +2,8 @@
 module InsensitiveLoad
   class List
     class << self
-      def all(path_src)
-        allocate.all(path_src)
+      def all(*args)
+        allocate.all(*args)
       end
 
       def dirs(*args)
@@ -15,28 +15,24 @@ module InsensitiveLoad
       end
     end
 
-    def all(path_src)
-      Gem.win_platform? \
-          ? collect_in_windows(path_src)
-          : collect_in_linux(path_src)
-    end
-
-    def dirs(path_src)
-      if not validate_path(path_src)
+    def all(*args)
+      if not validate_path(*args)
         return []
       end
 
-      all(path_src).select do |path|
+      Gem.win_platform? \
+          ? collect_in_windows(*args)
+          : collect_in_linux(*args)
+    end
+
+    def dirs(*args)
+      all(*args).select do |path|
         File.directory?(path)
       end
     end
 
-    def files(path_src)
-      if not validate_path(path_src)
-        return []
-      end
-
-      all(path_src).select do |path|
+    def files(*args)
+      all(*args).select do |path|
         File.file?(path)
       end
     end

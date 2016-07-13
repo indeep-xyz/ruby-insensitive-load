@@ -3,8 +3,8 @@ require "insensitive_load/list"
 
 module InsensitiveLoad
   class << self
-    def all(path_src)
-      List.all(path_src)
+    def all(*args)
+      List.all(*args)
     end
 
     def dirs(*args)
