@@ -12,12 +12,9 @@ module InsensitiveLoad
     end
 
     def glob(path_src)
-      delimiter = (Gem.win_platform?) ? '\\' : '/'
-      parts = path_src.split(delimiter)
-
-      parts[0] == '' \
-          ? glob_loop(parts[1..-1], '/')
-          : glob_loop(parts)
+      Gem.win_platform? \
+          ? glob_in_windows(path_src)
+          : glob_in_linux(path_src)
     end
 
     def files(path_src)
@@ -39,6 +36,18 @@ module InsensitiveLoad
       end
 
       true
+    end
+
+    def glob_in_linux(path_src, delimiter: '/')
+      parts = path_src.split(delimiter)
+
+      parts[0] == '' \
+          ? glob_loop(parts[1..-1], '/')
+          : glob_loop(parts)
+    end
+
+    def glob_in_windows(path)
+      File.exist?(path) ? [path] : []
     end
 
     def glob_loop(parts, prefix = '')
