@@ -1,18 +1,26 @@
 
 module InsensitiveLoad
   class List
+    attr_reader :delimiter
+    DEFAULT_DELIMITER = Gem.win_platform? ? '\\' : '/'
+
     class << self
-      def all(*args)
-        allocate.all(*args)
+      def all(*args, **options)
+        new(**options).all(*args)
       end
 
-      def dirs(*args)
-        allocate.dirs(*args)
+      def dirs(*args, **options)
+        new(**options).dirs(*args)
       end
 
-      def files(*args)
-        allocate.files(*args)
+      def files(*args, **options)
+        new(**options).files(*args)
       end
+    end
+
+    def initialize(
+        delimiter: DEFAULT_DELIMITER)
+      @delimiter = delimiter
     end
 
     def all(*args)
@@ -48,8 +56,8 @@ module InsensitiveLoad
       true
     end
 
-    def collect_in_linux(path_src, delimiter: '/')
-      parts = path_src.split(delimiter)
+    def collect_in_linux(path_src)
+      parts = path_src.split(@delimiter)
 
       parts[0] == '' \
           ? collect_loop(parts[1..-1], '/')
