@@ -7,6 +7,10 @@ module InsensitiveLoad
       List.glob(path_src)
     end
 
+    def dirs(*args)
+      List.dirs(*args)
+    end
+
     def files(*args)
       List.files(*args)
     end
