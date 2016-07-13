@@ -22,9 +22,9 @@ module InsensitiveLoad
         return []
       end
 
-      Gem.win_platform? \
-          ? files_in_windows(path_src)
-          : files_in_linux(path_src)
+      glob(path_src).select do |path|
+        File.file?(path)
+      end
     end
 
     private
@@ -64,18 +64,6 @@ module InsensitiveLoad
       end
 
       result
-    end
-
-    def files_in_linux(path_src)
-      glob(path_src).select do |path|
-        File.file?(path)
-      end
-    end
-
-    def files_in_windows(path)
-      File.file?(path) \
-          ? [path]
-          : []
     end
   end
 end
