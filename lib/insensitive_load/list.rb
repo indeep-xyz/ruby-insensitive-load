@@ -18,10 +18,16 @@ module InsensitiveLoad
       end
     end
 
+    # - - - - - - - - - - - - - - - - - -
+    # initialize
+
     def initialize(
         delimiter: DEFAULT_DELIMITER)
       @delimiter = delimiter
     end
+
+    # - - - - - - - - - - - - - - - - - -
+    # list
 
     def all(*args)
       if not validate_path(*args)
@@ -47,6 +53,9 @@ module InsensitiveLoad
 
     private
 
+    # - - - - - - - - - - - - - - - - - -
+    # validate for listing
+
     def validate_path(path_src)
       if not path_src.kind_of?(String) \
           || path_src.size < 1
@@ -55,6 +64,9 @@ module InsensitiveLoad
 
       true
     end
+
+    # - - - - - - - - - - - - - - - - - -
+    # collect
 
     def collect_in_linux(path_src)
       parts = path_src.split(@delimiter)
