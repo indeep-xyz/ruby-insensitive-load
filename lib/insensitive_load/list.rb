@@ -5,6 +5,10 @@ module InsensitiveLoad
       def glob(path_src)
         allocate.glob(path_src)
       end
+
+      def files(*args)
+        allocate.files(*args)
+      end
     end
 
     def glob(path_src)
@@ -14,6 +18,16 @@ module InsensitiveLoad
       parts[0] == '' \
           ? glob_loop(parts[1..-1], '/')
           : glob_loop(parts)
+    end
+
+    def files(path_src)
+      if not validate_path(path_src)
+        return []
+      end
+
+      Gem.win_platform? \
+          ? files_in_windows(path_src)
+          : files_in_linux(path_src)
     end
 
     private
@@ -41,6 +55,18 @@ module InsensitiveLoad
       end
 
       result
+    end
+
+    def files_in_linux(path_src)
+      glob(path_src).select do |path|
+        File.file?(path)
+      end
+    end
+
+    def files_in_windows(path)
+      File.file?(path) \
+          ? [path]
+          : []
     end
   end
 end
