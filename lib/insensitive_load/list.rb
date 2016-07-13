@@ -2,8 +2,8 @@
 module InsensitiveLoad
   class List
     class << self
-      def glob(path_src)
-        allocate.glob(path_src)
+      def all(path_src)
+        allocate.all(path_src)
       end
 
       def dirs(*args)
@@ -15,10 +15,10 @@ module InsensitiveLoad
       end
     end
 
-    def glob(path_src)
+    def all(path_src)
       Gem.win_platform? \
-          ? glob_in_windows(path_src)
-          : glob_in_linux(path_src)
+          ? collect_in_windows(path_src)
+          : collect_in_linux(path_src)
     end
 
     def dirs(path_src)
@@ -26,7 +26,7 @@ module InsensitiveLoad
         return []
       end
 
-      glob(path_src).select do |path|
+      all(path_src).select do |path|
         File.directory?(path)
       end
     end
@@ -36,7 +36,7 @@ module InsensitiveLoad
         return []
       end
 
-      glob(path_src).select do |path|
+      all(path_src).select do |path|
         File.file?(path)
       end
     end
@@ -52,25 +52,25 @@ module InsensitiveLoad
       true
     end
 
-    def glob_in_linux(path_src, delimiter: '/')
+    def collect_in_linux(path_src, delimiter: '/')
       parts = path_src.split(delimiter)
 
       parts[0] == '' \
-          ? glob_loop(parts[1..-1], '/')
-          : glob_loop(parts)
+          ? collect_loop(parts[1..-1], '/')
+          : collect_loop(parts)
     end
 
-    def glob_in_windows(path)
+    def collect_in_windows(path)
       File.exist?(path) ? [path] : []
     end
 
-    def glob_loop(parts, prefix = '')
+    def collect_loop(parts, prefix = '')
       result = []
 
       Dir.glob("#{prefix}*").select do |path|
         if path.downcase == prefix.downcase + parts[0].downcase
           if parts.size > 1
-            result |= glob_loop(parts[1..-1], path + "/")
+            result |= collect_loop(parts[1..-1], path + "/")
           elsif parts.size < 2
             result.push(path)
           end
