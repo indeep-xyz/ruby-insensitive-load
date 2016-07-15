@@ -5,8 +5,8 @@ describe InsensitiveLoad do
     expect(InsensitiveLoad::VERSION).not_to be nil
   end
 
-  describe '.all' do
-    subject { InsensitiveLoad.all(path_src) }
+  describe '.items' do
+    subject { InsensitiveLoad.items(path_src) }
 
     context 'when passed a relative path of existence' do
       before {

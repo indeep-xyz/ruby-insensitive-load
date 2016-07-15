@@ -3,8 +3,8 @@ require "insensitive_load/collector"
 module InsensitiveLoad
   class List
     class << self
-      def all(*args, **options)
-        allocate.all(*args, **options)
+      def items(*args, **options)
+        allocate.items(*args, **options)
       end
 
       def dirs(*args, **options)
@@ -19,7 +19,7 @@ module InsensitiveLoad
     # - - - - - - - - - - - - - - - - - -
     # list
 
-    def all(*args)
+    def items(*args)
       collector = Collector.new(*args)
       collector.items
     end
