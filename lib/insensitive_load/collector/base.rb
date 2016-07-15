@@ -2,7 +2,6 @@ module InsensitiveLoad
   module Collector
     class Base
       attr_reader \
-          :collection,
           :delimiter
 
       # - - - - - - - - - - - - - - - - - -
@@ -29,6 +28,10 @@ module InsensitiveLoad
 
       # - - - - - - - - - - - - - - - - - -
       # getter
+
+      def items
+        @collection
+      end
 
       def dirs
         @collection.select do |path|

@@ -21,7 +21,7 @@ module InsensitiveLoad
 
     def all(*args)
       collector = Collector.new(*args)
-      collector.collection
+      collector.items
     end
 
     def dirs(*args)
