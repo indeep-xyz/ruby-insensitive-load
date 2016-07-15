@@ -25,15 +25,13 @@ module InsensitiveLoad
     end
 
     def dirs(*args)
-      all(*args).select do |path|
-        File.directory?(path)
-      end
+      collector = Collector.new(*args)
+      collector.dirs
     end
 
     def files(*args)
-      all(*args).select do |path|
-        File.file?(path)
-      end
+      collector = Collector.new(*args)
+      collector.files
     end
   end
 end

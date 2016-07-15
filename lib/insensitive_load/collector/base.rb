@@ -28,6 +28,21 @@ module InsensitiveLoad
       end
 
       # - - - - - - - - - - - - - - - - - -
+      # getter
+
+      def dirs
+        @collection.select do |path|
+          File.directory?(path)
+        end
+      end
+
+      def files
+        @collection.select do |path|
+          File.file?(path)
+        end
+      end
+
+      # - - - - - - - - - - - - - - - - - -
       # setter
 
       def set_options(
