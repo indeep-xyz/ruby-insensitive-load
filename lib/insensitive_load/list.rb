@@ -19,9 +19,12 @@ module InsensitiveLoad
     # - - - - - - - - - - - - - - - - - -
     # list
 
-    def items(*args)
+    def items(
+        *args,
+        absolute_path: nil,
+        **options)
       collector = Collector.new(*args)
-      collector.items
+      collector.items(absolute_path)
     end
 
     def dirs(*args)

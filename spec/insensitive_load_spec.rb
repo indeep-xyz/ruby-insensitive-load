@@ -25,10 +25,28 @@ describe InsensitiveLoad do
             eq(4)
       end
 
-      it 'return an array including relative path' do
-        subject.each do |path|
-          expect(path.downcase).to \
-              eq(path_src.downcase)
+      context 'without "absolute_path" option' do
+        it 'return an array including relative path' do
+          subject.each do |path|
+            expect(path.downcase).to \
+                eq(path_src.downcase)
+          end
+        end
+      end
+
+      context 'with "absolute_path" option' do
+        subject {
+          InsensitiveLoad.items(
+              path_src,
+              absolute_path: true)
+        }
+
+        it 'return an array including absolute path' do
+          subject.each do |path|
+            matched_head = path.downcase.index(path_src.downcase)
+            expect(matched_head).to \
+                be > 1
+          end
         end
       end
     end
@@ -46,10 +64,27 @@ describe InsensitiveLoad do
             eq(1)
       end
 
-      it 'return an array including absolute path' do
-        subject.each do |path|
-          expect(path.downcase).to \
-              eq(path_src.downcase)
+      context 'without "absolute_path" option' do
+        it 'return an array including absolute path' do
+          subject.each do |path|
+            expect(path.downcase).to \
+                eq(path_src.downcase)
+          end
+        end
+      end
+
+      context 'with "absolute_path" option' do
+        subject {
+          InsensitiveLoad.items(
+              path_src,
+              absolute_path: true)
+        }
+
+        it 'return an array including absolute path' do
+          subject.each do |path|
+            expect(path.downcase).to \
+                eq(path_src.downcase)
+          end
         end
       end
     end

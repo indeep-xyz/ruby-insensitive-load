@@ -29,8 +29,10 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # getter
 
-      def items
-        @collection
+      def items(absolute_path = false)
+        (absolute_path) \
+            ? absolute_items
+            : @collection
       end
 
       def dirs
@@ -56,6 +58,15 @@ module InsensitiveLoad
       private
 
       # - - - - - - - - - - - - - - - - - -
+      # getter
+
+      def absolute_items
+        @collection.map do |path|
+          File.expand_path(path)
+        end
+      end
+
+      # - - - - - - - - - - - - - - - - - -
       # validate
 
       def validate_path(path_src)
@@ -66,7 +77,6 @@ module InsensitiveLoad
 
         true
       end
-
     end
   end
 end
