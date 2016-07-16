@@ -23,7 +23,7 @@ module InsensitiveLoad
         *args,
         absolute_path: nil,
         **options)
-      collector = Collector.new(*args)
+      collector = Collector.new(*args, **options)
       collector.items(absolute_path)
     end
 

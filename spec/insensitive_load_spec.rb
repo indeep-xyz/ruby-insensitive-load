@@ -49,6 +49,19 @@ describe InsensitiveLoad do
           end
         end
       end
+
+      context 'with unreasonable "delimiter" option' do
+        subject {
+          InsensitiveLoad.items(
+              path_src,
+              delimiter: 'DELIMITER_STRING')
+        }
+
+        it 'return an empty array' do
+          expect(subject.size).to \
+              eq(0)
+        end
+      end
     end
 
     context 'when passed an absolute path of existence' do
