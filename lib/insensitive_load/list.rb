@@ -20,10 +20,10 @@ module InsensitiveLoad
     # list
 
     def items(
-        *args,
+        path_src,
         absolute_path: nil,
-        **options)
-      collector = Collector.new(*args, **options)
+        **init_options)
+      collector = Collector.new(path_src, **init_options)
       collector.items(absolute_path)
     end
 
