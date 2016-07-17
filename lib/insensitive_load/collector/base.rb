@@ -35,14 +35,14 @@ module InsensitiveLoad
             : @collection
       end
 
-      def dirs
-        @collection.select do |path|
+      def dirs(absolute_path = false)
+        items(absolute_path).select do |path|
           File.directory?(path)
         end
       end
 
-      def files
-        @collection.select do |path|
+      def files(absolute_path = false)
+        items(absolute_path).select do |path|
           File.file?(path)
         end
       end

@@ -27,14 +27,18 @@ module InsensitiveLoad
       collector.items(absolute_path)
     end
 
-    def dirs(*args)
+    def dirs(
+        *args,
+        absolute_path: nil)
       collector = Collector.new(*args)
-      collector.dirs
+      collector.dirs(absolute_path)
     end
 
-    def files(*args)
+    def files(
+        *args,
+        absolute_path: nil)
       collector = Collector.new(*args)
-      collector.files
+      collector.files(absolute_path)
     end
   end
 end
