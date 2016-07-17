@@ -29,15 +29,17 @@ module InsensitiveLoad
 
     def dirs(
         *args,
-        absolute_path: nil)
-      collector = Collector.new(*args)
+        absolute_path: nil,
+        **init_options)
+      collector = Collector.new(*args, **init_options)
       collector.dirs(absolute_path)
     end
 
     def files(
         *args,
-        absolute_path: nil)
-      collector = Collector.new(*args)
+        absolute_path: nil,
+        **init_options)
+      collector = Collector.new(*args, **init_options)
       collector.files(absolute_path)
     end
   end

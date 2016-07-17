@@ -147,6 +147,19 @@ describe InsensitiveLoad do
           end
         end
       end
+
+      context 'with unreasonable "delimiter" option' do
+        subject {
+          InsensitiveLoad.dirs(
+              path_src,
+              delimiter: 'DELIMITER_STRING')
+        }
+
+        it 'return an empty array' do
+          expect(subject.size).to \
+              eq(0)
+        end
+      end
     end
 
     context 'when passed an absolute path of existence' do
@@ -230,6 +243,19 @@ describe InsensitiveLoad do
             expect(matched_head).to \
                 be > 1
           end
+        end
+      end
+
+      context 'with unreasonable "delimiter" option' do
+        subject {
+          InsensitiveLoad.files(
+              path_src,
+              delimiter: 'DELIMITER_STRING')
+        }
+
+        it 'return an empty array' do
+          expect(subject.size).to \
+              eq(0)
         end
       end
     end
