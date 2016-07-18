@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe InsensitiveLoad::Collector do
+  let(:instance) { described_class.new(path_src) }
 
   shared_context 'at root of the sample file structure' do
     before {
@@ -17,6 +18,33 @@ describe InsensitiveLoad::Collector do
     it 'return an array of proper size' do
       expect(subject.size).to \
           eq(size)
+    end
+  end
+
+  shared_examples 'return path equal insensitively the path source' do |method_name|
+    let(:returner) { instance.send(method_name).map(&:downcase) }
+
+    it 'return the equivalent insensitively' do
+      expect(returner).to \
+          all(eq(path_src.downcase))
+    end
+  end
+
+  shared_examples 'initialized by absolute path' do |method_name|
+    context 'without "absolute_path" option' do
+      it_behaves_like \
+          'return path equal insensitively the path source',
+          method_name
+    end
+
+    context 'with "absolute_path" option' do
+      let(:returner) { instance.send(method_name) }
+      let(:returner_absoluted) { instance.send(method_name, true) }
+
+      it 'return an array including absolute path' do
+        expect(returner_absoluted).to \
+            eq(returner)
+      end
     end
   end
 
@@ -79,29 +107,9 @@ describe InsensitiveLoad::Collector do
           'to return an instance of Array',
           1
 
-      context 'without "absolute_path" option' do
-        it 'return an array including absolute path' do
-          subject.each do |path|
-            expect(path.downcase).to \
-                eq(path_src.downcase)
-          end
-        end
-      end
-
-      context 'with "absolute_path" option' do
-        subject {
-          InsensitiveLoad.items(
-              path_src,
-              absolute_path: true)
-        }
-
-        it 'return an array including absolute path' do
-          subject.each do |path|
-            expect(path.downcase).to \
-                eq(path_src.downcase)
-          end
-        end
-      end
+      it_behaves_like \
+          'initialized by absolute path',
+          :items
     end
   end
 
@@ -164,29 +172,9 @@ describe InsensitiveLoad::Collector do
           'to return an instance of Array',
           1
 
-      context 'without "absolute_path" option' do
-        it 'return an array including absolute path' do
-          subject.each do |path|
-            expect(path.downcase).to \
-                eq(path_src.downcase)
-          end
-        end
-      end
-
-      context 'with "absolute_path" option' do
-        subject {
-          InsensitiveLoad.dirs(
-              path_src,
-              absolute_path: true)
-        }
-
-        it 'return an array including absolute path' do
-          subject.each do |path|
-            expect(path.downcase).to \
-                eq(path_src.downcase)
-          end
-        end
-      end
+      it_behaves_like \
+          'initialized by absolute path',
+          :dirs
     end
   end
 
@@ -249,29 +237,9 @@ describe InsensitiveLoad::Collector do
           'to return an instance of Array',
           1
 
-      context 'without "absolute_path" option' do
-        it 'return an array including absolute path' do
-          subject.each do |path|
-            expect(path.downcase).to \
-                eq(path_src.downcase)
-          end
-        end
-      end
-
-      context 'with "absolute_path" option' do
-        subject {
-          InsensitiveLoad.files(
-              path_src,
-              absolute_path: true)
-        }
-
-        it 'return an array including absolute path' do
-          subject.each do |path|
-            expect(path.downcase).to \
-                eq(path_src.downcase)
-          end
-        end
-      end
+      it_behaves_like \
+          'initialized by absolute path',
+          :files
     end
   end
 end
