@@ -70,7 +70,7 @@ describe InsensitiveLoad::Collector do
   end
 
   describe '#items' do
-    subject { InsensitiveLoad.items(path_src) }
+    subject { instance.items }
 
     context 'when passed a relative path of existence' do
       let(:path_src) { 'ext/soFTwaRe/Config.conf' }
@@ -114,7 +114,7 @@ describe InsensitiveLoad::Collector do
   end
 
   describe '#dirs' do
-    subject { InsensitiveLoad.dirs(path_src) }
+    subject { instance.dirs }
 
     context 'when passed a relative path of existence' do
       let(:path_src) { 'ext/soFTwaRe/Config.conf' }
@@ -158,7 +158,7 @@ describe InsensitiveLoad::Collector do
   end
 
   describe '#files' do
-    subject { InsensitiveLoad.files(path_src) }
+    subject { instance.files }
 
     context 'when passed a relative path of existence' do
       let(:path_src) { 'ext/soFTwaRe/Config.conf' }
