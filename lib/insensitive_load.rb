@@ -3,6 +3,10 @@ require "insensitive_load/collector"
 
 module InsensitiveLoad
   class << self
+    def collector(path_src, **init_options)
+      Collector.new(path_src, **init_options)
+    end
+
     def items(
         path_src,
         absolute_path: nil,
