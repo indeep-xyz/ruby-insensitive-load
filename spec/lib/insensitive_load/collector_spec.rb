@@ -87,8 +87,8 @@ describe InsensitiveLoad::Collector do
           :items
 
       context 'with unreasonable "delimiter" option' do
-        subject {
-          InsensitiveLoad.items(
+        let(:instance) {
+          described_class.new(
               path_src,
               delimiter: 'DELIMITER_STRING')
         }
@@ -129,19 +129,6 @@ describe InsensitiveLoad::Collector do
       it_behaves_like \
           'initialized by relative path',
           :dirs
-
-      context 'with unreasonable "delimiter" option' do
-        subject {
-          InsensitiveLoad.dirs(
-              path_src,
-              delimiter: 'DELIMITER_STRING')
-        }
-
-        it 'return an empty array' do
-          expect(subject.size).to \
-              eq(0)
-        end
-      end
     end
 
     context 'when passed an absolute path of existence' do
@@ -173,19 +160,6 @@ describe InsensitiveLoad::Collector do
       it_behaves_like \
           'initialized by relative path',
           :files
-
-      context 'with unreasonable "delimiter" option' do
-        subject {
-          InsensitiveLoad.files(
-              path_src,
-              delimiter: 'DELIMITER_STRING')
-        }
-
-        it 'return an empty array' do
-          expect(subject.size).to \
-              eq(0)
-        end
-      end
     end
 
     context 'when passed an absolute path of existence' do
