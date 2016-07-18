@@ -8,6 +8,18 @@ describe InsensitiveLoad::Collector do
     }
   end
 
+  shared_examples 'to return an instance of Array' do |size|
+    it 'return an array' do
+      expect(subject).to \
+          be_a_kind_of(Array)
+    end
+
+    it 'return an array of proper size' do
+      expect(subject.size).to \
+          eq(size)
+    end
+  end
+
   describe '.items' do
     subject { InsensitiveLoad.items(path_src) }
 
@@ -17,15 +29,9 @@ describe InsensitiveLoad::Collector do
       include_context \
           'at root of the sample file structure'
 
-      it 'return an array' do
-        expect(subject).to \
-            be_a_kind_of(Array)
-      end
-
-      it 'return an array including files' do
-        expect(subject.size).to \
-            eq(4)
-      end
+      it_behaves_like \
+          'to return an instance of Array',
+          4
 
       context 'without "absolute_path" option' do
         it 'return an array including relative path' do
@@ -69,15 +75,9 @@ describe InsensitiveLoad::Collector do
     context 'when passed an absolute path of existence' do
       let(:path_src) { '/eTc/HOsTS' }
 
-      it 'return an array' do
-        expect(subject).to \
-            be_a_kind_of(Array)
-      end
-
-      it 'return an array including files' do
-        expect(subject.size).to \
-            eq(1)
-      end
+      it_behaves_like \
+          'to return an instance of Array',
+          1
 
       context 'without "absolute_path" option' do
         it 'return an array including absolute path' do
@@ -114,15 +114,9 @@ describe InsensitiveLoad::Collector do
       include_context \
           'at root of the sample file structure'
 
-      it 'return an array' do
-        expect(subject).to \
-            be_a_kind_of(Array)
-      end
-
-      it 'return an array including directories' do
-        expect(subject.size).to \
-            eq(1)
-      end
+      it_behaves_like \
+          'to return an instance of Array',
+          1
 
       context 'without "absolute_path" option' do
         it 'return an array including relative path' do
@@ -166,15 +160,9 @@ describe InsensitiveLoad::Collector do
     context 'when passed an absolute path of existence' do
       let(:path_src) { '/uSR/Bin' }
 
-      it 'return an array' do
-        expect(subject).to \
-            be_a_kind_of(Array)
-      end
-
-      it 'return an array including files' do
-        expect(subject.size).to \
-            eq(1)
-      end
+      it_behaves_like \
+          'to return an instance of Array',
+          1
 
       context 'without "absolute_path" option' do
         it 'return an array including absolute path' do
@@ -211,15 +199,9 @@ describe InsensitiveLoad::Collector do
       include_context \
           'at root of the sample file structure'
 
-      it 'return an array' do
-        expect(subject).to \
-            be_a_kind_of(Array)
-      end
-
-      it 'return an array including files' do
-        expect(subject.size).to \
-            eq(3)
-      end
+      it_behaves_like \
+          'to return an instance of Array',
+          3
 
       context 'without "absolute_path" option' do
         it 'return an array including relative path' do
@@ -263,15 +245,9 @@ describe InsensitiveLoad::Collector do
     context 'when passed an absolute path of existence' do
       let(:path_src) { '/eTc/HOsTS' }
 
-      it 'return an array' do
-        expect(subject).to \
-            be_a_kind_of(Array)
-      end
-
-      it 'return an array including files' do
-        expect(subject.size).to \
-            eq(1)
-      end
+      it_behaves_like \
+          'to return an instance of Array',
+          1
 
       context 'without "absolute_path" option' do
         it 'return an array including absolute path' do
