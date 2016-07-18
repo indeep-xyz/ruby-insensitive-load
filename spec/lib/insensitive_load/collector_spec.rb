@@ -1,15 +1,21 @@
 require 'spec_helper'
 
 describe InsensitiveLoad::Collector do
+
+  shared_context 'at root of the sample file structure' do
+    before {
+      Dir.chdir(File.expand_path('../../../sample', __FILE__))
+    }
+  end
+
   describe '.items' do
     subject { InsensitiveLoad.items(path_src) }
 
     context 'when passed a relative path of existence' do
-      before {
-        Dir.chdir(File.expand_path('../../../sample', __FILE__))
-      }
-
       let(:path_src) { 'ext/soFTwaRe/Config.conf' }
+
+      include_context \
+          'at root of the sample file structure'
 
       it 'return an array' do
         expect(subject).to \
@@ -103,11 +109,10 @@ describe InsensitiveLoad::Collector do
     subject { InsensitiveLoad.dirs(path_src) }
 
     context 'when passed a relative path of existence' do
-      before {
-        Dir.chdir(File.expand_path('../../../sample', __FILE__))
-      }
-
       let(:path_src) { 'ext/soFTwaRe/Config.conf' }
+
+      include_context \
+          'at root of the sample file structure'
 
       it 'return an array' do
         expect(subject).to \
@@ -201,11 +206,10 @@ describe InsensitiveLoad::Collector do
     subject { InsensitiveLoad.files(path_src) }
 
     context 'when passed a relative path of existence' do
-      before {
-        Dir.chdir(File.expand_path('../../../sample', __FILE__))
-      }
-
       let(:path_src) { 'ext/soFTwaRe/Config.conf' }
+
+      include_context \
+          'at root of the sample file structure'
 
       it 'return an array' do
         expect(subject).to \
