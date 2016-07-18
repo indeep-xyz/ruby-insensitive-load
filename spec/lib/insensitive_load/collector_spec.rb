@@ -69,7 +69,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe '.items' do
+  describe '#items' do
     subject { InsensitiveLoad.items(path_src) }
 
     context 'when passed a relative path of existence' do
@@ -113,7 +113,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe '.dirs' do
+  describe '#dirs' do
     subject { InsensitiveLoad.dirs(path_src) }
 
     context 'when passed a relative path of existence' do
@@ -157,7 +157,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe '.files' do
+  describe '#files' do
     subject { InsensitiveLoad.files(path_src) }
 
     context 'when passed a relative path of existence' do
