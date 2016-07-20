@@ -11,6 +11,14 @@ describe InsensitiveLoad::Collector do
     let(:path_src) { 'ext/soFTwaRe/Config.conf' }
   end
 
+  shared_context 'absolute file in your system' do
+    let(:path_src) {
+      Gem.win_platform? \
+          ? ENV['ComSpec']
+          : '/eTc/HOsTS'
+    }
+  end
+
   shared_examples 'to return an instance of Array' do |size|
     it 'return an array' do
       expect(subject).to \
@@ -102,7 +110,8 @@ describe InsensitiveLoad::Collector do
       end
 
       context 'when passed an absolute path of existence' do
-        let(:path_src) { '/eTc/HOsTS' }
+        include_context \
+            'absolute file in your system'
 
         it_behaves_like \
             'to return an instance of Array',
@@ -160,7 +169,8 @@ describe InsensitiveLoad::Collector do
       end
 
       context 'when passed an absolute path of existence' do
-        let(:path_src) { '/eTc/HOsTS' }
+        include_context \
+            'absolute file in your system'
 
         it_behaves_like \
             'to return an instance of Array',
