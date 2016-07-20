@@ -3,10 +3,12 @@ require 'spec_helper'
 describe InsensitiveLoad::Collector do
   let(:instance) { described_class.new(path_src) }
 
-  shared_context 'at root of the sample file structure' do
+  shared_context 'relative path in the sample file structure' do
     before {
       Dir.chdir(File.expand_path('../../../sample', __FILE__))
     }
+
+    let(:path_src) { 'ext/soFTwaRe/Config.conf' }
   end
 
   shared_examples 'to return an instance of Array' do |size|
@@ -74,10 +76,8 @@ describe InsensitiveLoad::Collector do
       subject { instance.items }
 
       context 'when passed a relative path of existence' do
-        let(:path_src) { 'ext/soFTwaRe/Config.conf' }
-
         include_context \
-            'at root of the sample file structure'
+            'relative path in the sample file structure'
 
         it_behaves_like \
             'to return an instance of Array',
@@ -118,10 +118,8 @@ describe InsensitiveLoad::Collector do
       subject { instance.dirs }
 
       context 'when passed a relative path of existence' do
-        let(:path_src) { 'ext/soFTwaRe/Config.conf' }
-
         include_context \
-            'at root of the sample file structure'
+            'relative path in the sample file structure'
 
         it_behaves_like \
             'to return an instance of Array',
@@ -149,10 +147,8 @@ describe InsensitiveLoad::Collector do
       subject { instance.files }
 
       context 'when passed a relative path of existence' do
-        let(:path_src) { 'ext/soFTwaRe/Config.conf' }
-
         include_context \
-            'at root of the sample file structure'
+            'relative path in the sample file structure'
 
         it_behaves_like \
             'to return an instance of Array',
