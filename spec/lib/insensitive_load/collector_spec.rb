@@ -11,6 +11,14 @@ describe InsensitiveLoad::Collector do
     let(:path_src) { 'ext/soFTwaRe/Config.conf' }
   end
 
+  shared_context 'absolute directory in your system' do
+    let(:path_src) {
+      Gem.win_platform? \
+          ? ENV['TEMP']
+          : '/uSR/Bin'
+    }
+  end
+
   shared_context 'absolute file in your system' do
     let(:path_src) {
       Gem.win_platform? \
@@ -140,7 +148,8 @@ describe InsensitiveLoad::Collector do
       end
 
       context 'when passed an absolute path of existence' do
-        let(:path_src) { '/uSR/Bin' }
+        include_context \
+            'absolute directory in your system'
 
         it_behaves_like \
             'to return an instance of Array',
