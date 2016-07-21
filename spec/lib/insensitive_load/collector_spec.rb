@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe InsensitiveLoad::Collector do
-  let(:instance) { described_class.new(path_src) }
+  let(:instance) { described_class.new(path_source) }
 
   shared_context 'relative path in the sample file structure' do
     before {
       Dir.chdir(File.expand_path('../../../sample', __FILE__))
     }
 
-    let(:path_src) { 'ext/soFTwaRe/Config.conf' }
+    let(:path_source) { 'ext/soFTwaRe/Config.conf' }
   end
 
   shared_context 'absolute directory in your system' do
-    let(:path_src) {
+    let(:path_source) {
       Gem.win_platform? \
           ? ENV['TEMP']
           : '/uSR/Bin'
@@ -20,7 +20,7 @@ describe InsensitiveLoad::Collector do
   end
 
   shared_context 'absolute file in your system' do
-    let(:path_src) {
+    let(:path_source) {
       Gem.win_platform? \
           ? ENV['ComSpec']
           : '/eTc/HOsTS'
@@ -45,7 +45,7 @@ describe InsensitiveLoad::Collector do
 
       it 'return the equivalent insensitively' do
         expect(returner).to \
-            all(eq(path_src.downcase))
+            all(eq(path_source.downcase))
       end
     end
 
@@ -80,7 +80,7 @@ describe InsensitiveLoad::Collector do
 
         it 'return an array including absolute path' do
           returner_absoluted.each do |path|
-            matched_head = path.downcase.index(path_src.downcase)
+            matched_head = path.downcase.index(path_source.downcase)
             expect(matched_head).to \
                 be > 1
           end
@@ -106,7 +106,7 @@ describe InsensitiveLoad::Collector do
         context 'with unreasonable "delimiter" option' do
           let(:instance) {
             described_class.new(
-                path_src,
+                path_source,
                 delimiter: 'DELIMITER_STRING')
           }
 
