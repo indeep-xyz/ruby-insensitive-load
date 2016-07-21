@@ -6,10 +6,10 @@ describe InsensitiveLoad do
   end
 
   describe '.collector' do
-    subject { described_class.collector(path_src) }
+    subject { described_class.collector(path_source) }
 
     context 'when passed a path source' do
-      let(:path_src) { 'path/to/something' }
+      let(:path_source) { 'path/to/something' }
 
       it 'return an instance of a kind of Collector::Base' do
         is_expected.to \
@@ -20,8 +20,8 @@ describe InsensitiveLoad do
 
   describe 'methods to get pathes' do
     shared_examples 'to use the same name method in Collector' do |method_name|
-      subject { described_class.send(method_name, path_src) }
-      let(:path_src) { 'PATH/TO/UNREASONABLE_' + [].__id__.to_s }
+      subject { described_class.send(method_name, path_source) }
+      let(:path_source) { 'PATH/TO/UNREASONABLE_' + [].__id__.to_s }
 
       context 'when passed a unreasonable path source' do
         it 'return an instance of Array' do
