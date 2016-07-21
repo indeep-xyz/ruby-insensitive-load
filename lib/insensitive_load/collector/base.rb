@@ -17,13 +17,13 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # initialize
 
-      def initialize(path_src, **options)
-        if not validate_path(path_src)
-          fail PathError.new(path_src)
+      def initialize(path_source, **options)
+        if not validate_path(path_source)
+          fail PathError.new(path_source)
         end
 
         set_options(**options)
-        @collection = collect(path_src)
+        @collection = collect(path_source)
       end
 
       # - - - - - - - - - - - - - - - - - -
@@ -69,9 +69,9 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # validate
 
-      def validate_path(path_src)
-        if not path_src.kind_of?(String) \
-            || path_src.size < 1
+      def validate_path(path_source)
+        if not path_source.kind_of?(String) \
+            || path_source.size < 1
           return false
         end
 

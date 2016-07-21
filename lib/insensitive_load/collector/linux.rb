@@ -16,8 +16,8 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # collect
 
-      def collect(path_src)
-        parts = path_src.split(@delimiter)
+      def collect(path_source)
+        parts = path_source.split(@delimiter)
 
         parts[0] == '' \
             ? collect_loop(parts[1..-1], '/')
