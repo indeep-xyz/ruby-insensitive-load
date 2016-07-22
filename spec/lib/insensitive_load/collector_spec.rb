@@ -39,7 +39,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe 'methods to get data in @collection' do
+  describe 'methods to get path in @collection' do
     shared_examples 'return path equal insensitively the path source' do |method_name|
       let(:returner) { instance.send(method_name).map(&:downcase) }
 
