@@ -47,6 +47,12 @@ module InsensitiveLoad
         end
       end
 
+      def values(absolute_path = false)
+        files(absolute_path).map do |path|
+          File.read(path)
+        end
+      end
+
       # - - - - - - - - - - - - - - - - - -
       # setter
 

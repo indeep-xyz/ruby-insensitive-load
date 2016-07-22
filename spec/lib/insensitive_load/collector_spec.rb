@@ -39,6 +39,26 @@ describe InsensitiveLoad::Collector do
     end
   end
 
+  describe 'methods to get data in @collection' do
+    describe '#values' do
+      subject { instance.values }
+
+      context 'when passed a relative path of existence' do
+        include_context \
+            'relative path in the sample file structure'
+
+        it_behaves_like \
+            'to return an instance of Array',
+            3
+
+        it 'return the text in files' do
+          is_expected.to \
+              all(match(/\AI am '[^']+'.\z*/))
+        end
+      end
+    end
+  end
+
   describe 'methods to get path in @collection' do
     shared_examples 'return path equal insensitively the path source' do |method_name|
       let(:returner) { instance.send(method_name).map(&:downcase) }
