@@ -11,22 +11,6 @@ describe InsensitiveLoad::Collector do
     let(:path_source) { 'ext/soFTwaRe/Config.conf' }
   end
 
-  shared_context 'absolute directory in your system' do
-    let(:path_source) {
-      Gem.win_platform? \
-          ? ENV['TEMP'].upcase
-          : '/uSR/Bin'
-    }
-  end
-
-  shared_context 'absolute file in your system' do
-    let(:path_source) {
-      Gem.win_platform? \
-          ? ENV['ComSpec'].upcase
-          : '/eTc/HOsTS'
-    }
-  end
-
   shared_examples 'to return an instance of Array' do |size|
     it 'return an array' do
       expect(subject).to \
@@ -60,6 +44,22 @@ describe InsensitiveLoad::Collector do
   end
 
   describe 'methods to get path in @collection' do
+    shared_context 'absolute directory in your system' do
+      let(:path_source) {
+        Gem.win_platform? \
+            ? ENV['TEMP'].upcase
+            : '/uSR/Bin'
+      }
+    end
+
+    shared_context 'absolute file in your system' do
+      let(:path_source) {
+        Gem.win_platform? \
+            ? ENV['ComSpec'].upcase
+            : '/eTc/HOsTS'
+      }
+    end
+
     shared_examples 'return path equal insensitively the path source' do |method_name|
       let(:returner) { instance.send(method_name).map(&:downcase) }
 
