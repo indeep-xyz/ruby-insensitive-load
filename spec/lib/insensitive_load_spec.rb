@@ -18,6 +18,19 @@ describe InsensitiveLoad do
     end
   end
 
+  describe '.values' do
+    subject { described_class.values(path_source) }
+
+    context 'when passed a path source' do
+      let(:path_source) { 'path/to/something' }
+
+      it 'return an instance of a kind of Array' do
+        is_expected.to \
+            be_a_kind_of(Array)
+      end
+    end
+  end
+
   describe 'methods to get pathes' do
     shared_examples 'to use the same name method in Collector' do |method_name|
       subject { described_class.send(method_name, path_source) }

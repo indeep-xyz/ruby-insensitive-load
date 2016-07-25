@@ -24,5 +24,10 @@ module InsensitiveLoad
         absolute_path: nil)
       collector(*args).files(absolute_path)
     end
+
+    def values(
+        *args)
+      collector(*args).values
+    end
   end
 end
