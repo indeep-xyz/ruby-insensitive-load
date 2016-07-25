@@ -23,26 +23,26 @@ module InsensitiveLoad
         end
 
         set_options(**options)
-        @collection = collect(path_source)
+        @collection = collect(path_source).map do |path|
+          File.expand_path(path)
+        end
       end
 
       # - - - - - - - - - - - - - - - - - -
       # getter
 
-      def items(absolute_path = false)
-        (absolute_path) \
-            ? absolute_items
-            : @collection
+      def items
+        @collection
       end
 
-      def dirs(absolute_path = false)
-        items(absolute_path).select do |path|
+      def dirs
+        items.select do |path|
           File.directory?(path)
         end
       end
 
-      def files(absolute_path = false)
-        items(absolute_path).select do |path|
+      def files
+        items.select do |path|
           File.file?(path)
         end
       end
@@ -65,12 +65,6 @@ module InsensitiveLoad
 
       # - - - - - - - - - - - - - - - - - -
       # getter
-
-      def absolute_items
-        @collection.map do |path|
-          File.expand_path(path)
-        end
-      end
 
       # - - - - - - - - - - - - - - - - - -
       # validate

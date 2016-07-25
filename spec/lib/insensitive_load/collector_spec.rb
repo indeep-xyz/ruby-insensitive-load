@@ -60,7 +60,7 @@ describe InsensitiveLoad::Collector do
       }
     end
 
-    shared_examples 'return path equal insensitively the path source' do |method_name|
+    shared_examples 'initialized by absolute path' do |method_name|
       let(:returner) { instance.send(method_name).map(&:downcase) }
 
       it 'return the equivalent insensitively' do
@@ -69,41 +69,14 @@ describe InsensitiveLoad::Collector do
       end
     end
 
-    shared_examples 'initialized by absolute path' do |method_name|
-      context 'without "absolute_path" option' do
-        it_behaves_like \
-            'return path equal insensitively the path source',
-            method_name
-      end
-
-      context 'with "absolute_path" option' do
-        let(:returner) { instance.send(method_name) }
-        let(:returner_absoluted) { instance.send(method_name, true) }
-
-        it 'return an array including absolute path' do
-          expect(returner_absoluted).to \
-              eq(returner)
-        end
-      end
-    end
-
     shared_examples 'initialized by relative path' do |method_name|
-      context 'without "absolute_path" option' do
-        it_behaves_like \
-            'return path equal insensitively the path source',
-            method_name
-      end
+      let(:returner) { instance.send(method_name) }
 
-      context 'with "absolute_path" option' do
-        let(:returner) { instance.send(method_name) }
-        let(:returner_absoluted) { instance.send(method_name, true) }
-
-        it 'return an array including absolute path' do
-          returner_absoluted.each do |path|
-            matched_head = path.downcase.index(path_source.downcase)
-            expect(matched_head).to \
-                be > 1
-          end
+      it 'return an array including absolute path' do
+        returner.each do |path|
+          matched_head = path.downcase.index(path_source.downcase)
+          expect(matched_head).to \
+              be > 1
         end
       end
     end
