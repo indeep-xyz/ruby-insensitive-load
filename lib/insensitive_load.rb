@@ -19,8 +19,7 @@ module InsensitiveLoad
       collector(*args).files
     end
 
-    def values(
-        *args)
+    def values(*args)
       collector(*args).values
     end
   end
