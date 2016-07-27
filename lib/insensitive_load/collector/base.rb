@@ -1,3 +1,5 @@
+require "insensitive_load/item"
+
 module InsensitiveLoad
   module Collector
     class Base
@@ -24,7 +26,7 @@ module InsensitiveLoad
 
         set_options(**options)
         @collection = collect(path_source).map do |path|
-          File.expand_path(path)
+          Item.new(path)
         end
       end
 
@@ -32,25 +34,19 @@ module InsensitiveLoad
       # getter
 
       def pathes
-        @collection
+        @collection.map(&:path)
       end
 
       def dirs
-        pathes.select do |path|
-          File.directory?(path)
-        end
+        @collection.select(&:dir?)
       end
 
       def files
-        pathes.select do |path|
-          File.file?(path)
-        end
+        @collection.select(&:file?)
       end
 
       def values
-        files.map do |path|
-          File.read(path)
-        end
+        files.map(&:value)
       end
 
       # - - - - - - - - - - - - - - - - - -
