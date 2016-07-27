@@ -31,18 +31,18 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # getter
 
-      def items
+      def pathes
         @collection
       end
 
       def dirs
-        items.select do |path|
+        pathes.select do |path|
           File.directory?(path)
         end
       end
 
       def files
-        items.select do |path|
+        pathes.select do |path|
           File.file?(path)
         end
       end

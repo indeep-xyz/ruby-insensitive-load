@@ -81,8 +81,8 @@ describe InsensitiveLoad::Collector do
       end
     end
 
-    describe '#items' do
-      subject { instance.items }
+    describe '#pathes' do
+      subject { instance.pathes }
 
       context 'when passed a relative path of existence' do
         include_context \
@@ -94,7 +94,7 @@ describe InsensitiveLoad::Collector do
 
         it_behaves_like \
             'initialized by relative path',
-            :items
+            :pathes
 
         context 'with unreasonable "delimiter" option' do
           let(:instance) {
@@ -120,7 +120,7 @@ describe InsensitiveLoad::Collector do
 
         it_behaves_like \
             'initialized by absolute path',
-            :items
+            :pathes
       end
     end
 

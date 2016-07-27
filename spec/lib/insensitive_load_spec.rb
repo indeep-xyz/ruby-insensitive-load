@@ -44,10 +44,10 @@ describe InsensitiveLoad do
       end
     end
 
-    describe '.items' do
+    describe '.pathes' do
       it_behaves_like \
           'to use the same name method in Collector',
-          :items
+          :pathes
     end
 
     describe '.dirs' do

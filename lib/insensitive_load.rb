@@ -7,8 +7,8 @@ module InsensitiveLoad
       Collector.new(*args)
     end
 
-    def items(*args)
-      collector(*args).items
+    def pathes(*args)
+      collector(*args).pathes
     end
 
     def dirs(*args)
