@@ -25,7 +25,7 @@ module InsensitiveLoad
         end
 
         set_options(**options)
-        @collection = collect(path_source).map do |path|
+        @items = collect(path_source).map do |path|
           Item.new(path)
         end
       end
@@ -34,15 +34,15 @@ module InsensitiveLoad
       # getter
 
       def pathes
-        @collection.map(&:path)
+        @items.map(&:path)
       end
 
       def dirs
-        @collection.select(&:dir?)
+        @items.select(&:dir?)
       end
 
       def files
-        @collection.select(&:file?)
+        @items.select(&:file?)
       end
 
       def values
