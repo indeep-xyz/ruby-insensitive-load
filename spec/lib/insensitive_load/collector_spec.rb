@@ -23,6 +23,26 @@ describe InsensitiveLoad::Collector do
     end
   end
 
+  describe 'methods to get @items' do
+    describe '#items' do
+      subject { instance.items }
+
+      context 'when passed a relative path of existence' do
+        include_context \
+            'relative path in the sample file structure'
+
+        it_behaves_like \
+            'to return an instance of Array',
+            4
+
+        it 'return Array including instances of InsensitiveLoad::Item' do
+          is_expected.to \
+              all(be_an_instance_of(InsensitiveLoad::Item))
+        end
+      end
+    end
+  end
+
   describe 'methods to get data in @items' do
     describe '#values' do
       subject { instance.values }

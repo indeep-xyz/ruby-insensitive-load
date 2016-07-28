@@ -4,7 +4,8 @@ module InsensitiveLoad
   module Collector
     class Base
       attr_reader \
-          :delimiter
+          :delimiter,
+          :items
 
       # - - - - - - - - - - - - - - - - - -
       # error
