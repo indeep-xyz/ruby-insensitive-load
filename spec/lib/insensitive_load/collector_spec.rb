@@ -23,7 +23,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe 'methods to get data in @collection' do
+  describe 'methods to get data in @items' do
     describe '#values' do
       subject { instance.values }
 
@@ -43,7 +43,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe 'methods to get path in @collection' do
+  describe 'methods to get path in @items' do
     shared_context 'absolute directory in your system' do
       let(:path_source) {
         Gem.win_platform? \
