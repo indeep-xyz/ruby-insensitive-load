@@ -1,5 +1,5 @@
 module InsensitiveLoad
-  class Item < BasicObject
+  class Item
     attr_reader :path
 
     def initialize(path)
