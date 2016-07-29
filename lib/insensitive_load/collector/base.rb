@@ -61,7 +61,7 @@ module InsensitiveLoad
       # initialize
 
       def initialize_by_string(path_source)
-        if not validate_path(path_source)
+        if not validate_path_source(path_source)
           fail PathError.new(path_source)
         end
 
@@ -73,7 +73,7 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # validate
 
-      def validate_path(path_source)
+      def validate_path_source(path_source)
         if not path_source.kind_of?(String) \
             || path_source.size < 1
           return false
