@@ -20,15 +20,9 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # initialize
 
-      def initialize(path_source, **options)
-        if not validate_path(path_source)
-          fail PathError.new(path_source)
-        end
-
+      def initialize(source, **options)
         set_options(**options)
-        @items = collect(path_source).map do |path|
-          Item.new(path)
-        end
+        initialize_by_string(source)
       end
 
       # - - - - - - - - - - - - - - - - - -
@@ -62,6 +56,19 @@ module InsensitiveLoad
 
       # - - - - - - - - - - - - - - - - - -
       # getter
+
+      # - - - - - - - - - - - - - - - - - -
+      # initialize
+
+      def initialize_by_string(path_source)
+        if not validate_path(path_source)
+          fail PathError.new(path_source)
+        end
+
+        @items = collect(path_source).map do |path|
+          Item.new(path)
+        end
+      end
 
       # - - - - - - - - - - - - - - - - - -
       # validate
