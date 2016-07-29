@@ -55,10 +55,7 @@ module InsensitiveLoad
       private
 
       # - - - - - - - - - - - - - - - - - -
-      # getter
-
-      # - - - - - - - - - - - - - - - - - -
-      # initialize
+      # initialize by string
 
       def initialize_by_string(path_source)
         if not validate_path_source(path_source)
@@ -69,9 +66,6 @@ module InsensitiveLoad
           Item.new(path)
         end
       end
-
-      # - - - - - - - - - - - - - - - - - -
-      # validate
 
       def validate_path_source(path_source)
         if not path_source.kind_of?(String) \
