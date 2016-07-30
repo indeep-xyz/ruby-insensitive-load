@@ -10,6 +10,13 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # error
 
+      ItemError = Class.new(::ArgumentError) do
+        def initialize(object)
+          message = 'The passed argument "%s" is not a kind of Item or Array including items.' % object
+          super(message)
+        end
+      end
+
       PathError = Class.new(::ArgumentError) do
         def initialize(path)
           message = 'The path "%s" is not available.' % path
@@ -47,6 +54,11 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # setter
 
+      def add_item(item)
+        @items ||= []
+        @items |= make_item_array(item)
+      end
+
       def set_options(
           delimiter: Collector::DEFAULT_DELIMITER)
         @delimiter = delimiter
@@ -74,6 +86,30 @@ module InsensitiveLoad
         end
 
         true
+      end
+
+      # - - - - - - - - - - - - - - - - - -
+      # make item array
+
+      def make_item_array(item)
+        if not validate_item(item)
+          fail ItemError.new(item)
+        end
+
+        item.kind_of?(Array) ? item : [item]
+      end
+
+      def validate_item(object)
+        if object.kind_of?(Item)
+          return true
+        end
+
+        if object.kind_of?(Array) \
+            && object.kind_of?(Item)
+          return true
+        end
+
+        false
       end
     end
   end

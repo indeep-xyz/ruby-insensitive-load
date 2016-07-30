@@ -23,6 +23,31 @@ describe InsensitiveLoad::Collector do
     end
   end
 
+  describe 'methods to add @items' do
+    describe '#add_item' do
+      let(:instance) { described_class::Base.allocate }
+
+      context 'when passed a kind of InsensitiveLoad::Item' do
+        let(:item) { InsensitiveLoad::Item.allocate }
+        subject { instance.add_item(item) }
+
+        it 'add @items correctly' do
+          is_expected.to \
+              all(be_an_instance_of(InsensitiveLoad::Item))
+        end
+      end
+
+      context 'when passed a nil' do
+        subject { instance.add_item(nil) }
+
+        it 'raise ItemError' do
+          expect { subject }.to \
+              raise_error(described_class::Base::ItemError)
+        end
+      end
+    end
+  end
+
   describe 'methods to get @items' do
     describe '#items' do
       subject { instance.items }
