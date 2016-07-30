@@ -17,7 +17,7 @@ module InsensitiveLoad
         end
       end
 
-      PathError = Class.new(::ArgumentError) do
+      PathSourceError = Class.new(::ArgumentError) do
         def initialize(path)
           message = 'The path "%s" is not available.' % path
           super(message)
@@ -71,7 +71,7 @@ module InsensitiveLoad
 
       def initialize_by_string(path_source)
         if not validate_path_source(path_source)
-          fail PathError.new(path_source)
+          fail PathSourceError.new(path_source)
         end
 
         @items = collect(path_source).map do |path|
