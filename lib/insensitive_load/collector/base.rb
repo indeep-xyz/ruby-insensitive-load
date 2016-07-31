@@ -54,7 +54,7 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # setter
 
-      def add_item(item)
+      def add(item)
         @items ||= []
         @items |= make_item_array(item)
       end
