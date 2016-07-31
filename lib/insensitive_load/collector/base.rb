@@ -92,10 +92,7 @@ module InsensitiveLoad
       # make item array
 
       def make_item_array(item)
-        if not validate_item(item)
-          fail ItemError.new(item)
-        end
-
+        validate_item(item)
         item.kind_of?(Array) ? item : [item]
       end
 
@@ -109,7 +106,7 @@ module InsensitiveLoad
           return true
         end
 
-        false
+        fail ItemError.new(object)
       end
     end
   end
