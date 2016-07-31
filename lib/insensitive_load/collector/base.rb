@@ -70,9 +70,7 @@ module InsensitiveLoad
       # initialize by string
 
       def initialize_by_string(path_source)
-        if not validate_path_source(path_source)
-          fail PathSourceError.new(path_source)
-        end
+        validate_path_source(path_source)
 
         @items = collect(path_source).map do |path|
           Item.new(path)
@@ -82,7 +80,7 @@ module InsensitiveLoad
       def validate_path_source(path_source)
         if not path_source.kind_of?(String) \
             || path_source.size < 1
-          return false
+          fail PathSourceError.new(path_source)
         end
 
         true
