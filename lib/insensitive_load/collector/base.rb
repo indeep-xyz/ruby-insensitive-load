@@ -78,12 +78,12 @@ module InsensitiveLoad
       end
 
       def validate_path_source(path_source)
-        if not path_source.kind_of?(String) \
-            || path_source.size < 1
-          fail PathSourceError.new(path_source)
+        if path_source.kind_of?(String) \
+            && path_source.size > 0
+          return true
         end
 
-        true
+        fail PathSourceError.new(path_source)
       end
 
       # - - - - - - - - - - - - - - - - - -
