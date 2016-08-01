@@ -18,48 +18,46 @@ describe InsensitiveLoad do
     end
   end
 
-  describe '.values' do
-    subject { described_class.values(path_source) }
+  describe 'methods which pass through to instance method of Collector' do
+    shared_context 'Collector mocks' do
+      let(:collector_module) { described_class::Collector }
+      let(:collector_method_mock) { double('Collector method') }
+      let(:collector_module_mock) { class_double(collector_module_mock) }
 
-    context 'when passed a path source' do
-      let(:path_source) { 'path/to/something' }
-
-      it 'return an instance of a kind of Array' do
-        is_expected.to \
-            be_a_kind_of(Array)
+      before do
+        allow(collector_module).to \
+            receive(:new).
+            and_return(collector_method_mock)
       end
     end
-  end
 
-  describe 'methods to get pathes' do
-    shared_examples 'to use the same name method in Collector' do |method_name|
-      subject { described_class.send(method_name, path_source) }
-      let(:path_source) { 'PATH/TO/UNREASONABLE_' + [].__id__.to_s }
+    shared_examples 'Collector method' do |method_name|
+      subject { described_class.send(method_name, nil) }
+      include_context 'Collector mocks'
 
-      context 'when passed a unreasonable path source' do
-        it 'return an instance of Array' do
-          expect(subject).to \
-              be_a_kind_of(Array)
-        end
+      it 'pass to Collector#pathes' do
+        allow(collector_method_mock).to \
+            receive(method_name)
+
+        expect(subject).to \
+            eq(nil)
       end
     end
 
     describe '.pathes' do
-      it_behaves_like \
-          'to use the same name method in Collector',
-          :pathes
+      it_behaves_like 'Collector method', :pathes
     end
 
     describe '.dirs' do
-      it_behaves_like \
-          'to use the same name method in Collector',
-          :dirs
+      it_behaves_like 'Collector method', :dirs
     end
 
     describe '.files' do
-      it_behaves_like \
-          'to use the same name method in Collector',
-          :files
+      it_behaves_like 'Collector method', :files
+    end
+
+    describe '.values' do
+      it_behaves_like 'Collector method', :values
     end
   end
 end
