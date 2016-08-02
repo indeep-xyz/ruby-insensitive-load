@@ -29,7 +29,10 @@ module InsensitiveLoad
 
       def initialize(source, **options)
         set_options(**options)
-        initialize_by_string(source)
+
+        source.kind_of?(String) \
+            ? initialize_by_string(source)
+            : add(source)
       end
 
       # - - - - - - - - - - - - - - - - - -
@@ -40,15 +43,15 @@ module InsensitiveLoad
       end
 
       def dirs
-        @items.select(&:dir?)
+        self.class.new(@items.select(&:dir?))
       end
 
       def files
-        @items.select(&:file?)
+        self.class.new(@items.select(&:file?))
       end
 
       def values
-        files.map(&:value)
+        files.items.map(&:value)
       end
 
       # - - - - - - - - - - - - - - - - - -

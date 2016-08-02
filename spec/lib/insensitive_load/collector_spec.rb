@@ -11,6 +11,22 @@ describe InsensitiveLoad::Collector do
     let(:path_source) { 'ext/soFTwaRe/Config.conf' }
   end
 
+  shared_context 'absolute directory in your system' do
+    let(:path_source) {
+      Gem.win_platform? \
+          ? ENV['TEMP'].upcase
+          : '/uSR/Bin'
+    }
+  end
+
+  shared_context 'absolute file in your system' do
+    let(:path_source) {
+      Gem.win_platform? \
+          ? ENV['ComSpec'].upcase
+          : '/eTc/HOsTS'
+    }
+  end
+
   shared_examples 'to return an instance of Array' do |size|
     it 'return an array' do
       expect(subject).to \
@@ -105,22 +121,6 @@ describe InsensitiveLoad::Collector do
   end
 
   describe 'methods to get path in @items' do
-    shared_context 'absolute directory in your system' do
-      let(:path_source) {
-        Gem.win_platform? \
-            ? ENV['TEMP'].upcase
-            : '/uSR/Bin'
-      }
-    end
-
-    shared_context 'absolute file in your system' do
-      let(:path_source) {
-        Gem.win_platform? \
-            ? ENV['ComSpec'].upcase
-            : '/eTc/HOsTS'
-      }
-    end
-
     shared_examples 'initialized by absolute path' do |method_name|
       let(:returner) { instance.send(method_name).map(&:downcase) }
 
@@ -184,6 +184,41 @@ describe InsensitiveLoad::Collector do
             :pathes
       end
     end
+  end
+
+  describe 'returns an instance of Collector' do
+    shared_examples 'initialized by absolute path' do |method_name|
+      let(:returner) { instance.send(method_name).pathes.map(&:downcase) }
+
+      it 'return the equivalent insensitively' do
+        expect(returner).to \
+            all(eq(path_source.downcase))
+      end
+    end
+
+    shared_examples 'initialized by relative path' do |method_name|
+      let(:returner) { instance.send(method_name).pathes }
+
+      it 'return an array including absolute path' do
+        returner.each do |path|
+          matched_head = path.downcase.index(path_source.downcase)
+          expect(matched_head).to \
+              be > 1
+        end
+      end
+    end
+
+    shared_examples 'to return a kind of Collector' do |size|
+      it 'return an instance of Collector' do
+        expect(subject).to \
+            be_a_kind_of(InsensitiveLoad::Collector::Base)
+      end
+
+      it 'return an array of proper size' do
+        expect(subject.items.size).to \
+            eq(size)
+      end
+    end
 
     describe '#dirs' do
       subject { instance.dirs }
@@ -193,7 +228,7 @@ describe InsensitiveLoad::Collector do
             'relative path in the sample file structure'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return a kind of Collector',
             1
 
         it_behaves_like \
@@ -206,7 +241,7 @@ describe InsensitiveLoad::Collector do
             'absolute directory in your system'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return a kind of Collector',
             1
 
         it_behaves_like \
@@ -223,7 +258,7 @@ describe InsensitiveLoad::Collector do
             'relative path in the sample file structure'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return a kind of Collector',
             3
 
         it_behaves_like \
@@ -236,7 +271,7 @@ describe InsensitiveLoad::Collector do
             'absolute file in your system'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return a kind of Collector',
             1
 
         it_behaves_like \
