@@ -100,7 +100,7 @@ module InsensitiveLoad
         end
 
         if object.kind_of?(Array) \
-            && object.kind_of?(Item)
+            && object[0].kind_of?(Item)
           return true
         end
 
