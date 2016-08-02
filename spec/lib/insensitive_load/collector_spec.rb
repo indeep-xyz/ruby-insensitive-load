@@ -37,6 +37,22 @@ describe InsensitiveLoad::Collector do
         end
       end
 
+      context 'when passed an Array including Item instances' do
+        let(:item1) { InsensitiveLoad::Item.allocate }
+        let(:item2) { InsensitiveLoad::Item.allocate }
+        subject { instance.add([item1, item2]) }
+
+        it 'add @items correctly' do
+          is_expected.to \
+              all(be_an_instance_of(InsensitiveLoad::Item))
+        end
+
+        it 'be correct size of the added @items' do
+          expect(subject.size).to \
+              eq(2)
+        end
+      end
+
       context 'when passed a nil' do
         subject { instance.add(nil) }
 
