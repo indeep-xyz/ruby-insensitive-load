@@ -43,7 +43,7 @@ describe InsensitiveLoad::Collector do
     describe '#add' do
       let(:instance) { described_class::Base.allocate }
 
-      context 'when passed a kind of InsensitiveLoad::Item' do
+      context 'when passed an instance of InsensitiveLoad::Item' do
         let(:item) { InsensitiveLoad::Item.allocate }
         subject { instance.add(item) }
 
