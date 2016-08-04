@@ -186,7 +186,7 @@ describe InsensitiveLoad::Collector do
     end
   end
 
-  describe 'returns an instance of Collector' do
+  describe 'returns a kind of Collector' do
     shared_examples 'initialized by absolute path' do |method_name|
       let(:returner) { instance.send(method_name).pathes.map(&:downcase) }
 
@@ -209,7 +209,7 @@ describe InsensitiveLoad::Collector do
     end
 
     shared_examples 'to return a kind of Collector' do |size|
-      it 'return an instance of Collector' do
+      it 'return a kind of Collector' do
         expect(subject).to \
             be_a_kind_of(InsensitiveLoad::Collector::Base)
       end
