@@ -36,11 +36,18 @@ module InsensitiveLoad
       end
 
       # - - - - - - - - - - - - - - - - - -
-      # getter
+      # get parameters in @items
 
       def pathes
         @items.map(&:path)
       end
+
+      def values
+        files.items.map(&:value)
+      end
+
+      # - - - - - - - - - - - - - - - - - -
+      # get items from @items
 
       def dirs
         self.class.new(@items.select(&:dir?))
@@ -48,10 +55,6 @@ module InsensitiveLoad
 
       def files
         self.class.new(@items.select(&:file?))
-      end
-
-      def values
-        files.items.map(&:value)
       end
 
       # - - - - - - - - - - - - - - - - - -
