@@ -92,7 +92,7 @@ describe InsensitiveLoad::Collector do
             'to return an instance of Array',
             4
 
-        it 'return Array including instances of InsensitiveLoad::Item' do
+        it 'return Array filled with instances of InsensitiveLoad::Item' do
           is_expected.to \
               all(be_an_instance_of(InsensitiveLoad::Item))
         end
