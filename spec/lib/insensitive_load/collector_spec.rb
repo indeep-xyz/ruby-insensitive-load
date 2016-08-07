@@ -145,6 +145,19 @@ describe InsensitiveLoad::Collector do
     describe '#pathes' do
       subject { instance.pathes }
 
+      context 'when passed an absolute path of existence' do
+        include_context \
+            'absolute file in your system'
+
+        it_behaves_like \
+            'to return an instance of Array',
+            1
+
+        it_behaves_like \
+            'initialized by absolute path',
+            :pathes
+      end
+
       context 'when passed a relative path of existence' do
         include_context \
             'relative path in the sample file structure'
@@ -169,19 +182,6 @@ describe InsensitiveLoad::Collector do
                 eq(0)
           end
         end
-      end
-
-      context 'when passed an absolute path of existence' do
-        include_context \
-            'absolute file in your system'
-
-        it_behaves_like \
-            'to return an instance of Array',
-            1
-
-        it_behaves_like \
-            'initialized by absolute path',
-            :pathes
       end
     end
   end
@@ -223,19 +223,6 @@ describe InsensitiveLoad::Collector do
     describe '#dirs' do
       subject { instance.dirs }
 
-      context 'when passed a relative path of existence' do
-        include_context \
-            'relative path in the sample file structure'
-
-        it_behaves_like \
-            'to return a kind of Collector',
-            1
-
-        it_behaves_like \
-            'initialized by relative path',
-            :dirs
-      end
-
       context 'when passed an absolute path of existence' do
         include_context \
             'absolute directory in your system'
@@ -248,10 +235,6 @@ describe InsensitiveLoad::Collector do
             'initialized by absolute path',
             :dirs
       end
-    end
-
-    describe '#files' do
-      subject { instance.files }
 
       context 'when passed a relative path of existence' do
         include_context \
@@ -259,12 +242,16 @@ describe InsensitiveLoad::Collector do
 
         it_behaves_like \
             'to return a kind of Collector',
-            3
+            1
 
         it_behaves_like \
             'initialized by relative path',
-            :files
+            :dirs
       end
+    end
+
+    describe '#files' do
+      subject { instance.files }
 
       context 'when passed an absolute path of existence' do
         include_context \
@@ -276,6 +263,19 @@ describe InsensitiveLoad::Collector do
 
         it_behaves_like \
             'initialized by absolute path',
+            :files
+      end
+
+      context 'when passed a relative path of existence' do
+        include_context \
+            'relative path in the sample file structure'
+
+        it_behaves_like \
+            'to return a kind of Collector',
+            3
+
+        it_behaves_like \
+            'initialized by relative path',
             :files
       end
     end
