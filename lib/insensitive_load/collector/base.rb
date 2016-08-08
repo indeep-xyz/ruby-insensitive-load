@@ -12,14 +12,18 @@ module InsensitiveLoad
 
       ItemError = Class.new(::ArgumentError) do
         def initialize(object)
-          message = 'The passed argument "%s" is not a kind of Item or Array including items.' % object
+          message = 'The passed argument "%s" (%s) is not a kind of Item or Array including items.' % [
+              object,
+              object.class.name]
           super(message)
         end
       end
 
       PathSourceError = Class.new(::ArgumentError) do
         def initialize(path)
-          message = 'The path "%s" is not available.' % path
+          message = 'The path "%s" (%s) is not available.' % [
+              path,
+              path.class.name]
           super(message)
         end
       end
