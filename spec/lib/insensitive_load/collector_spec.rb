@@ -61,6 +61,17 @@ describe InsensitiveLoad::Collector do
             be_a_kind_of(described_class::Base)
       end
     end
+
+    context 'when passed an array including Item instances' do
+        let(:item1) { InsensitiveLoad::Item.allocate }
+        let(:item2) { InsensitiveLoad::Item.allocate }
+        subject { described_class.new([item1, item2]) }
+
+      it 'create a kind of InsensitiveLoad::Collector::Base' do
+        is_expected.to \
+            be_a_kind_of(described_class::Base)
+      end
+    end
   end
 
   describe 'methods to add @items' do
