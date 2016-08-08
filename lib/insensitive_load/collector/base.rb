@@ -20,10 +20,10 @@ module InsensitiveLoad
       end
 
       PathSourceError = Class.new(::ArgumentError) do
-        def initialize(path)
+        def initialize(object)
           message = 'The path "%s" (%s) is not available.' % [
-              path,
-              path.class.name]
+              object,
+              object.class.name]
           super(message)
         end
       end
