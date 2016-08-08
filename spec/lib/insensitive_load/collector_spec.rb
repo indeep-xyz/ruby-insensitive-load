@@ -39,6 +39,20 @@ describe InsensitiveLoad::Collector do
     end
   end
 
+  describe '.new' do
+    context 'when passed a relative path of existence' do
+      subject { described_class.new(path_source) }
+
+      include_context \
+          'relative path in the sample file structure'
+
+      it 'create a kind of InsensitiveLoad::Collector::Base' do
+        is_expected.to \
+            be_a_kind_of(described_class::Base)
+      end
+    end
+  end
+
   describe 'methods to add @items' do
     describe '#add' do
       let(:instance) { described_class::Base.allocate }
