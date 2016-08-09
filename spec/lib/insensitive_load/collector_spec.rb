@@ -75,12 +75,12 @@ describe InsensitiveLoad::Collector do
   end
 
   describe 'methods to add @items' do
-    describe '#add' do
+    describe '#add_item' do
       let(:instance) { described_class::Base.allocate }
 
       context 'when passed an instance of InsensitiveLoad::Item' do
         let(:item) { InsensitiveLoad::Item.allocate }
-        subject { instance.add(item) }
+        subject { instance.add_item(item) }
 
         it 'add @items correctly' do
           is_expected.to \
@@ -91,7 +91,7 @@ describe InsensitiveLoad::Collector do
       context 'when passed an Array including Item instances' do
         let(:item1) { InsensitiveLoad::Item.allocate }
         let(:item2) { InsensitiveLoad::Item.allocate }
-        subject { instance.add([item1, item2]) }
+        subject { instance.add_item([item1, item2]) }
 
         it 'add @items correctly' do
           is_expected.to \
@@ -105,7 +105,7 @@ describe InsensitiveLoad::Collector do
       end
 
       context 'when passed a nil' do
-        subject { instance.add(nil) }
+        subject { instance.add_item(nil) }
 
         it 'raise ItemError' do
           expect { subject }.to \

@@ -36,7 +36,7 @@ module InsensitiveLoad
 
         source.kind_of?(String) \
             ? initialize_by_string(source)
-            : add(source)
+            : add_item(source)
       end
 
       # - - - - - - - - - - - - - - - - - -
@@ -64,7 +64,7 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # setter
 
-      def add(item)
+      def add_item(item)
         @items ||= []
         @items |= make_item_array(item)
       end
