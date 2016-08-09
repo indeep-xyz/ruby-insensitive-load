@@ -33,10 +33,7 @@ module InsensitiveLoad
 
       def initialize(source, **options)
         set_options(**options)
-
-        source.kind_of?(String) \
-            ? initialize_by_string(source)
-            : add_item(source)
+        add(source)
       end
 
       # - - - - - - - - - - - - - - - - - -
@@ -63,6 +60,12 @@ module InsensitiveLoad
 
       # - - - - - - - - - - - - - - - - - -
       # setter
+
+      def add(source)
+        source.kind_of?(String) \
+            ? initialize_by_string(source)
+            : add_item(source)
+      end
 
       def add_item(item)
         @items ||= []
