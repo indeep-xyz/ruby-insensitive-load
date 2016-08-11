@@ -63,8 +63,16 @@ module InsensitiveLoad
 
       def add(source)
         source.kind_of?(String) \
-            ? initialize_by_string(source)
+            ? add_by_path(source)
             : add_item(source)
+      end
+
+      def add_by_path(path_source)
+        validate_path_source(path_source)
+
+        @items = collect(path_source).map do |path|
+          Item.new(path)
+        end
       end
 
       def add_item(item)
@@ -81,14 +89,6 @@ module InsensitiveLoad
 
       # - - - - - - - - - - - - - - - - - -
       # initialize by string
-
-      def initialize_by_string(path_source)
-        validate_path_source(path_source)
-
-        @items = collect(path_source).map do |path|
-          Item.new(path)
-        end
-      end
 
       def validate_path_source(path_source)
         if path_source.kind_of?(String) \
