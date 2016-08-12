@@ -59,7 +59,7 @@ module InsensitiveLoad
       end
 
       # - - - - - - - - - - - - - - - - - -
-      # setter
+      # add @items
 
       def add(source)
         source.kind_of?(String) \
@@ -80,6 +80,9 @@ module InsensitiveLoad
         @items |= make_item_array(item)
       end
 
+      # - - - - - - - - - - - - - - - - - -
+      # set something
+
       def set_options(
           delimiter: Collector::DEFAULT_DELIMITER)
         @delimiter = delimiter
@@ -88,30 +91,7 @@ module InsensitiveLoad
       private
 
       # - - - - - - - - - - - - - - - - - -
-      # initialize by string
-
-      def check_path_source(object)
-        if object.kind_of?(String) \
-            && object.size > 0
-          return true
-        end
-
-        false
-      end
-
-      def validate_path_source(object)
-        unless check_path_source(object)
-          fail PathSourceError.new(object)
-        end
-      end
-
-      # - - - - - - - - - - - - - - - - - -
-      # make item array
-
-      def make_item_array(item)
-        validate_item(item)
-        item.kind_of?(Array) ? item : [item]
-      end
+      # check
 
       def check_item(object)
         if object.kind_of?(Item)
@@ -126,10 +106,36 @@ module InsensitiveLoad
         false
       end
 
+      def check_path_source(object)
+        if object.kind_of?(String) \
+            && object.size > 0
+          return true
+        end
+
+        false
+      end
+
+      # - - - - - - - - - - - - - - - - - -
+      # validate
+
       def validate_item(object)
         unless check_item(object)
           fail ItemError.new(object)
         end
+      end
+
+      def validate_path_source(object)
+        unless check_path_source(object)
+          fail PathSourceError.new(object)
+        end
+      end
+
+      # - - - - - - - - - - - - - - - - - -
+      # make something
+
+      def make_item_array(item)
+        validate_item(item)
+        item.kind_of?(Array) ? item : [item]
       end
     end
   end
