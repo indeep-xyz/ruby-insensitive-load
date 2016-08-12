@@ -81,6 +81,15 @@ describe InsensitiveLoad::Collector do
             raise_error(described_class::SourceError)
       end
     end
+
+    context 'when passed a blank string' do
+      subject { described_class.new('') }
+
+      it 'raise ItemError' do
+        expect { subject }.to \
+            raise_error(described_class::SourceError)
+      end
+    end
   end
 
   describe 'methods to add @items' do
