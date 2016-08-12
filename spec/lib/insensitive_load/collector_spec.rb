@@ -93,6 +93,20 @@ describe InsensitiveLoad::Collector do
   end
 
   describe 'methods to add @items' do
+    describe '#add_by_path' do
+      let(:instance) { described_class.allocate }
+      let(:search_class) { ::InsensitiveLoad::Search }
+
+      context 'when passed a nil' do
+        subject { instance.add_by_path(nil) }
+
+        it 'raise PathSourceError' do
+          expect { subject }.to \
+              raise_error(search_class::PathSourceError)
+        end
+      end
+    end
+
     describe '#add_item' do
       let(:instance) { described_class.allocate }
 
