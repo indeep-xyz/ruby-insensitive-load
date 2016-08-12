@@ -1,7 +1,7 @@
-require "insensitive_load/collector/base"
+require "insensitive_load/search/base"
 
 module InsensitiveLoad
-  module Collector
+  module Search
     class Windows < Base
 
       # - - - - - - - - - - - - - - - - - -

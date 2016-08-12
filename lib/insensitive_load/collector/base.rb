@@ -1,10 +1,10 @@
 require "insensitive_load/item"
+require "insensitive_load/search"
 
 module InsensitiveLoad
   module Collector
     class Base
       attr_reader \
-          :delimiter,
           :items
 
       # - - - - - - - - - - - - - - - - - -
@@ -40,8 +40,8 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # initialize
 
-      def initialize(source, **options)
-        set_options(**options)
+      def initialize(source, **search_options)
+        @search_options = search_options
         add(source)
       end
 
@@ -81,7 +81,7 @@ module InsensitiveLoad
       def add_by_path(path_source)
         validate_path_source(path_source)
 
-        @items = collect(path_source).map do |path|
+        @items = search(path_source).map do |path|
           Item.new(path)
         end
       end
@@ -89,14 +89,6 @@ module InsensitiveLoad
       def add_item(item)
         @items ||= []
         @items |= make_item_array(item)
-      end
-
-      # - - - - - - - - - - - - - - - - - -
-      # set something
-
-      def set_options(
-          delimiter: Collector::DEFAULT_DELIMITER)
-        @delimiter = delimiter
       end
 
       private
@@ -124,6 +116,13 @@ module InsensitiveLoad
         end
 
         false
+      end
+
+      # - - - - - - - - - - - - - - - - - -
+      # search
+
+      def search(*args)
+        ::InsensitiveLoad::Search.run(*args, **@search_options)
       end
 
       # - - - - - - - - - - - - - - - - - -

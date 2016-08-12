@@ -1,15 +1,10 @@
-require "insensitive_load/collector/linux"
-require "insensitive_load/collector/windows"
+require "insensitive_load/collector/base"
 
 module InsensitiveLoad
   module Collector
-    DEFAULT_DELIMITER = Gem.win_platform? ? '\\' : '/'
-
     class << self
       def new(*args)
-        Gem.win_platform? \
-            ? Windows.new(*args)
-            : Linux.new(*args)
+        Base.new(*args)
       end
     end
   end
