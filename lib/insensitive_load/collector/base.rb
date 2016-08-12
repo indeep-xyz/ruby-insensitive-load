@@ -90,13 +90,19 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # initialize by string
 
-      def validate_path_source(object)
+      def check_path_source(object)
         if object.kind_of?(String) \
             && object.size > 0
           return true
         end
 
-        fail PathSourceError.new(object)
+        false
+      end
+
+      def validate_path_source(object)
+        unless check_path_source(object)
+          fail PathSourceError.new(object)
+        end
       end
 
       # - - - - - - - - - - - - - - - - - -
@@ -107,7 +113,7 @@ module InsensitiveLoad
         item.kind_of?(Array) ? item : [item]
       end
 
-      def validate_item(object)
+      def check_item(object)
         if object.kind_of?(Item)
           return true
         end
@@ -117,7 +123,13 @@ module InsensitiveLoad
           return true
         end
 
-        fail ItemError.new(object)
+        false
+      end
+
+      def validate_item(object)
+        unless check_item(object)
+          fail ItemError.new(object)
+        end
       end
     end
   end
