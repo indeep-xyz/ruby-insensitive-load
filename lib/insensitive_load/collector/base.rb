@@ -90,13 +90,13 @@ module InsensitiveLoad
       # - - - - - - - - - - - - - - - - - -
       # initialize by string
 
-      def validate_path_source(path_source)
-        if path_source.kind_of?(String) \
-            && path_source.size > 0
+      def validate_path_source(object)
+        if object.kind_of?(String) \
+            && object.size > 0
           return true
         end
 
-        fail PathSourceError.new(path_source)
+        fail PathSourceError.new(object)
       end
 
       # - - - - - - - - - - - - - - - - - -
