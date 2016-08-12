@@ -11,9 +11,9 @@ describe InsensitiveLoad do
     context 'when passed a path source' do
       let(:path_source) { 'path/to/something' }
 
-      it 'return an instance of a kind of Collector::Base' do
+      it 'return an instance of a kind of Collector' do
         is_expected.to \
-            be_a_kind_of(described_class::Collector::Base)
+            be_a_kind_of(described_class::Collector)
       end
     end
   end

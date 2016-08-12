@@ -46,9 +46,9 @@ describe InsensitiveLoad::Collector do
       include_context \
           'relative path in the sample file structure'
 
-      it 'create a kind of InsensitiveLoad::Collector::Base' do
+      it 'create a kind of InsensitiveLoad::Collector' do
         is_expected.to \
-            be_a_kind_of(described_class::Base)
+            be_a_kind_of(described_class)
       end
     end
 
@@ -56,9 +56,9 @@ describe InsensitiveLoad::Collector do
       let(:item) { InsensitiveLoad::Item.allocate }
       subject { described_class.new(item) }
 
-      it 'create a kind of InsensitiveLoad::Collector::Base' do
+      it 'create a kind of InsensitiveLoad::Collector' do
         is_expected.to \
-            be_a_kind_of(described_class::Base)
+            be_a_kind_of(described_class)
       end
     end
 
@@ -67,9 +67,9 @@ describe InsensitiveLoad::Collector do
         let(:item2) { InsensitiveLoad::Item.allocate }
         subject { described_class.new([item1, item2]) }
 
-      it 'create a kind of InsensitiveLoad::Collector::Base' do
+      it 'create a kind of InsensitiveLoad::Collector' do
         is_expected.to \
-            be_a_kind_of(described_class::Base)
+            be_a_kind_of(described_class)
       end
     end
 
@@ -78,14 +78,14 @@ describe InsensitiveLoad::Collector do
 
       it 'raise SourceError' do
         expect { subject }.to \
-            raise_error(described_class::Base::SourceError)
+            raise_error(described_class::SourceError)
       end
     end
   end
 
   describe 'methods to add @items' do
     describe '#add_item' do
-      let(:instance) { described_class::Base.allocate }
+      let(:instance) { described_class.allocate }
 
       context 'when passed an instance of InsensitiveLoad::Item' do
         let(:item) { InsensitiveLoad::Item.allocate }
@@ -118,7 +118,7 @@ describe InsensitiveLoad::Collector do
 
         it 'raise ItemError' do
           expect { subject }.to \
-              raise_error(described_class::Base::ItemError)
+              raise_error(described_class::ItemError)
         end
       end
     end
@@ -255,7 +255,7 @@ describe InsensitiveLoad::Collector do
     shared_examples 'to return a kind of Collector' do |size|
       it 'return a kind of Collector' do
         expect(subject).to \
-            be_a_kind_of(InsensitiveLoad::Collector::Base)
+            be_a_kind_of(InsensitiveLoad::Collector)
       end
 
       it 'return an array of proper size' do
