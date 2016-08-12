@@ -18,15 +18,6 @@ module InsensitiveLoad
       end
     end
 
-    PathSourceError = Class.new(::ArgumentError) do
-      def initialize(object)
-        message = 'The path "%s" (%s) is not available.' % [
-            object,
-            object.class.name]
-        super(message)
-      end
-    end
-
     SourceError = Class.new(::ArgumentError) do
       def initialize(object)
         message = 'The source "%s" (%s) is not available.' % [
@@ -108,15 +99,6 @@ module InsensitiveLoad
       false
     end
 
-    def check_path_source(object)
-      if object.kind_of?(String) \
-          && object.size > 0
-        return true
-      end
-
-      false
-    end
-
     # - - - - - - - - - - - - - - - - - -
     # search
 
@@ -134,14 +116,12 @@ module InsensitiveLoad
     end
 
     def validate_path_source(object)
-      unless check_path_source(object)
-        fail PathSourceError.new(object)
-      end
+      Search.searchable?(object, errorable: true)
     end
 
     def validate_source(object)
       if !check_item(object) \
-          && !check_path_source(object)
+          && !Search.searchable?(object)
         fail SourceError.new(object)
       end
     end
