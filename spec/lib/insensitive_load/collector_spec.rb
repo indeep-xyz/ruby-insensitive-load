@@ -72,6 +72,15 @@ describe InsensitiveLoad::Collector do
             be_a_kind_of(described_class::Base)
       end
     end
+
+    context 'when passed a nil' do
+      subject { described_class.new(nil) }
+
+      it 'raise SourceError' do
+        expect { subject }.to \
+            raise_error(described_class::Base::SourceError)
+      end
+    end
   end
 
   describe 'methods to add @items' do

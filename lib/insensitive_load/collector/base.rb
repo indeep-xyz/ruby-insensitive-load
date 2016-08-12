@@ -28,6 +28,15 @@ module InsensitiveLoad
         end
       end
 
+      SourceError = Class.new(::ArgumentError) do
+        def initialize(object)
+          message = 'The source "%s" (%s) is not available.' % [
+              object,
+              object.class.name]
+          super(message)
+        end
+      end
+
       # - - - - - - - - - - - - - - - - - -
       # initialize
 
@@ -62,6 +71,8 @@ module InsensitiveLoad
       # add @items
 
       def add(source)
+        validate_source(source)
+
         source.kind_of?(String) \
             ? add_by_path(source)
             : add_item(source)
@@ -127,6 +138,13 @@ module InsensitiveLoad
       def validate_path_source(object)
         unless check_path_source(object)
           fail PathSourceError.new(object)
+        end
+      end
+
+      def validate_source(object)
+        if !check_item(object) \
+            && !check_path_source(object)
+          fail SourceError.new(object)
         end
       end
 
