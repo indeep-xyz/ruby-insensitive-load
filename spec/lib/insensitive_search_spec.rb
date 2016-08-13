@@ -3,7 +3,7 @@ require 'spec_helper'
 describe InsensitiveSearch do
   subject { described_class.run(path_source) }
 
-  shared_examples 'to return an instance of Array' do |size|
+  shared_examples 'to return paths correctly' do |size|
     it 'return an array' do
       expect(subject).to \
           be_a_kind_of(Array)
@@ -36,7 +36,7 @@ describe InsensitiveSearch do
             'absolute path of directory'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return paths correctly',
             1
       end
 
@@ -45,7 +45,7 @@ describe InsensitiveSearch do
             'absolute path of file'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return paths correctly',
             1
       end
     end
@@ -58,7 +58,7 @@ describe InsensitiveSearch do
             'relative path which is found plural things'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return paths correctly',
             4
       end
 
@@ -69,7 +69,7 @@ describe InsensitiveSearch do
             'relative path which is found singular thing'
 
         it_behaves_like \
-            'to return an instance of Array',
+            'to return paths correctly',
             1
       end
     end
