@@ -7,6 +7,15 @@ describe InsensitiveSearch do
     end
   end
 
+  describe '.new' do
+    subject { described_class.new }
+
+    it 'returns a kind of Engine::Base' do
+      is_expected.to \
+          be_a_kind_of(described_class::Engine::Base)
+    end
+  end
+
   describe '.run' do
     subject { described_class.run(path_source) }
 
