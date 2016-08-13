@@ -9,7 +9,9 @@ module InsensitiveSearch
 
       def search(path)
         guard(path_source)
-        File.exist?(path) ? [path] : []
+
+        File.exist?(path) \
+            && @filter.ok?(path) ? [path] : []
       end
     end
   end

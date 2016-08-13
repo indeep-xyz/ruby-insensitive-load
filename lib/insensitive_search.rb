@@ -9,6 +9,13 @@ module InsensitiveSearch
           : Engine::Linux.new(**options)
     end
 
+    def dir(*args, **options)
+      options[:directory] = true
+      options[:file] = false
+
+      run(*args, **options)
+    end
+
     def run(*args, **options)
       new(**options).search(*args)
     end

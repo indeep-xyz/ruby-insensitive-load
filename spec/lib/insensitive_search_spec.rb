@@ -72,4 +72,48 @@ describe InsensitiveSearch do
       end
     end
   end
+
+  describe '.dir' do
+    subject { described_class.dir(path_source) }
+
+    context 'when passed an absolute path' do
+      context 'where the directory exists' do
+        include_context \
+            'absolute path of directory'
+
+        it_behaves_like \
+            'to return paths correctly',
+            1
+      end
+
+      context 'where the file exists' do
+        include_context \
+            'absolute path of file'
+
+        it_behaves_like \
+            'to return paths correctly',
+            0
+      end
+    end
+
+    context 'when passed a relative path' do
+      context 'where plural files and directories exist' do
+        include_context \
+            'relative path which is found plural things'
+
+        it_behaves_like \
+            'to return paths correctly',
+            1
+      end
+
+      context 'where a file exists' do
+        include_context \
+            'relative path which is found singular thing'
+
+        it_behaves_like \
+            'to return paths correctly',
+            0
+      end
+    end
+  end
 end

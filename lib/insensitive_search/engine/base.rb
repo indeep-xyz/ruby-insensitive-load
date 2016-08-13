@@ -1,4 +1,5 @@
 require "insensitive_search/engine"
+require "insensitive_search/engine/filter"
 
 module InsensitiveSearch
   module Engine
@@ -11,8 +12,10 @@ module InsensitiveSearch
       end
 
       def set_options(
-          delimiter: DEFAULT_DELIMITER)
+          delimiter: DEFAULT_DELIMITER,
+          **options)
         @delimiter = delimiter
+        @filter = Filter.new(**options)
       end
 
       # - - - - - - - - - - - - - - - - - -

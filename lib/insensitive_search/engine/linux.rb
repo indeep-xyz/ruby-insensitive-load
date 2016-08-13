@@ -37,7 +37,7 @@ module InsensitiveSearch
 
           if parts.size > 1
             result |= search_loop(parts[1..-1], path)
-          else
+          elsif @filter.ok?(path)
             result.push(path)
           end
 
