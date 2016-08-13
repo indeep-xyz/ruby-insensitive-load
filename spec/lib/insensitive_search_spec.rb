@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe InsensitiveSearch do
-  subject { described_class.run(path_source) }
-
   describe 'VERSION' do
     it 'has a version number' do
       expect(described_class::VERSION).not_to be nil
@@ -10,6 +8,8 @@ describe InsensitiveSearch do
   end
 
   describe '.run' do
+    subject { described_class.run(path_source) }
+
     context 'when passed an absolute path' do
       context 'where the directory exists' do
         include_context \
@@ -32,8 +32,6 @@ describe InsensitiveSearch do
 
     context 'when passed a relative path' do
       context 'where plural files and directories exist' do
-        subject { described_class.run(path_source) }
-
         include_context \
             'relative path which is found plural things'
 
@@ -43,8 +41,6 @@ describe InsensitiveSearch do
       end
 
       context 'where singular thing exists' do
-        subject { described_class.run(path_source) }
-
         include_context \
             'relative path which is found singular thing'
 
@@ -55,7 +51,7 @@ describe InsensitiveSearch do
     end
 
     context 'when passed a nil' do
-      subject { described_class.run(nil) }
+      let(:path_source) { nil }
 
       it 'raise PathSourceError' do
         expect { subject }.to \
@@ -64,7 +60,7 @@ describe InsensitiveSearch do
     end
 
     context 'when passed a blank string' do
-      subject { described_class.run('') }
+      let(:path_source) { '' }
 
       it 'raise PathSourceError' do
         expect { subject }.to \
