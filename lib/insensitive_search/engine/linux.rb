@@ -17,6 +17,7 @@ module InsensitiveSearch
       # search
 
       def search(path_source)
+        guard(path_source)
         parts = path_source.split(@delimiter)
 
         parts[0] == '' \

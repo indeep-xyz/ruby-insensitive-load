@@ -8,6 +8,7 @@ module InsensitiveSearch
       # search
 
       def search(path)
+        guard(path_source)
         File.exist?(path) ? [path] : []
       end
     end

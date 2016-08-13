@@ -18,6 +18,10 @@ module InsensitiveSearch
       # - - - - - - - - - - - - - - - - - -
       # validate
 
+      def guard(object)
+        searchable?(object, errorable: true)
+      end
+
       def searchable?(
           object,
           errorable: false)

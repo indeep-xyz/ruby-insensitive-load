@@ -34,5 +34,23 @@ describe InsensitiveSearch do
           'to return an instance of Array',
           4
     end
+
+    context 'when passed a nil' do
+      subject { described_class.run(nil) }
+
+      it 'raise PathSourceError' do
+        expect { subject }.to \
+            raise_error(described_class::Engine::PathSourceError)
+      end
+    end
+
+    context 'when passed a blank string' do
+      subject { described_class.run('') }
+
+      it 'raise PathSourceError' do
+        expect { subject }.to \
+            raise_error(described_class::Engine::PathSourceError)
+      end
+    end
   end
 end
