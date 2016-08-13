@@ -13,6 +13,14 @@ describe InsensitiveSearch do
       expect(subject.size).to \
           eq(size)
     end
+
+    it 'return the equivalent insensitively' do
+      lower_result = subject.map(&:downcase)
+      lower_path_source = path_source.downcase
+
+      expect(lower_result).to \
+          all(eq(lower_path_source))
+    end
   end
 
   describe 'VERSION' do
