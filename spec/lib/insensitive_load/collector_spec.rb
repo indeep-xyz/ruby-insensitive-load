@@ -105,6 +105,15 @@ describe InsensitiveLoad::Collector do
               raise_error(search_class::PathSourceError)
         end
       end
+
+      context 'when passed a blank string' do
+        subject { instance.add_by_path('') }
+
+        it 'raise PathSourceError' do
+          expect { subject }.to \
+              raise_error(search_class::PathSourceError)
+        end
+      end
     end
 
     describe '#add_item' do
