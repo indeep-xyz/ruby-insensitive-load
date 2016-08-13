@@ -3,10 +3,14 @@ require "insensitive_search/engine/windows"
 
 module InsensitiveSearch
   class << self
-    def run(*args, **options)
+    def new(**options)
       Gem.win_platform? \
-          ? Engine::Windows.new(**options).search(*args)
-          : Engine::Linux.new(**options).search(*args)
+          ? Engine::Windows.new(**options)
+          : Engine::Linux.new(**options)
+    end
+
+    def run(*args, **options)
+      new(**options).search(*args)
     end
 
     def searchable?(*args)
