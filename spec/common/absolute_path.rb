@@ -1,4 +1,4 @@
-shared_context 'absolute directory in your system' do
+shared_context 'absolute path of directory' do
   let(:path_source) {
     Gem.win_platform? \
         ? ENV['TEMP'].upcase
@@ -6,7 +6,7 @@ shared_context 'absolute directory in your system' do
   }
 end
 
-shared_context 'absolute file in your system' do
+shared_context 'absolute path of file' do
   let(:path_source) {
     Gem.win_platform? \
         ? ENV['ComSpec'].upcase

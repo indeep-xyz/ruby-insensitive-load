@@ -25,7 +25,7 @@ describe InsensitiveSearch do
     context 'when passed an absolute path' do
       context 'where the directory exists' do
         include_context \
-            'absolute directory in your system'
+            'absolute path of directory'
 
         it_behaves_like \
             'to return an instance of Array',
@@ -34,7 +34,7 @@ describe InsensitiveSearch do
 
       context 'where the file exists' do
         include_context \
-            'absolute file in your system'
+            'absolute path of file'
 
         it_behaves_like \
             'to return an instance of Array',
