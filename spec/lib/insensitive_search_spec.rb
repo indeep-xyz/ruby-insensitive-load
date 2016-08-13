@@ -3,6 +3,22 @@ require 'spec_helper'
 describe InsensitiveSearch do
   subject { described_class.run(path_source) }
 
+  shared_context 'absolute directory in your system' do
+    let(:path_source) {
+      Gem.win_platform? \
+          ? ENV['TEMP'].upcase
+          : '/uSR/Bin'
+    }
+  end
+
+  shared_context 'absolute file in your system' do
+    let(:path_source) {
+      Gem.win_platform? \
+          ? ENV['ComSpec'].upcase
+          : '/eTc/HOsTS'
+    }
+  end
+
   shared_context 'relative path in the sample file structure' do
     before {
       Dir.chdir(File.expand_path('../../sample', __FILE__))
@@ -30,6 +46,26 @@ describe InsensitiveSearch do
   end
 
   describe '.run' do
+    context 'when passed an absolute path' do
+      context 'where the directory exists' do
+        include_context \
+            'absolute directory in your system'
+
+        it_behaves_like \
+            'to return an instance of Array',
+            1
+      end
+
+      context 'where the file exists' do
+        include_context \
+            'absolute file in your system'
+
+        it_behaves_like \
+            'to return an instance of Array',
+            1
+      end
+    end
+
     context 'when passed a relative path of existence' do
       subject { described_class.run(path_source) }
 
