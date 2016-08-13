@@ -1,43 +1,16 @@
-require "insensitive_search/base"
-require "insensitive_search/linux"
-require "insensitive_search/windows"
+require "insensitive_search/engine/linux"
+require "insensitive_search/engine/windows"
 
 module InsensitiveSearch
-  DEFAULT_DELIMITER = Gem.win_platform? ? '\\' : '/'
-
-  # - - - - - - - - - - - - - - - - - -
-  # error
-
-  PathSourceError = Class.new(::ArgumentError) do
-    def initialize(object)
-      message = 'The path "%s" (%s) is not available.' % [
-          object,
-          object.class.name]
-      super(message)
-    end
-  end
-
   class << self
-    def run(*args)
-      Base.run(*args)
+    def run(*args, **options)
+      Gem.win_platform? \
+          ? Engine::Windows.new(**options).search(*args)
+          : Engine::Linux.new(**options).search(*args)
     end
 
-    # - - - - - - - - - - - - - - - - - -
-    # validate
-
-    def searchable?(
-        object,
-        errorable: false)
-      if object.kind_of?(String) \
-          && object.size > 0
-        return true
-      end
-
-      if errorable
-        fail PathSourceError.new(object)
-      end
-
-      false
+    def searchable?(*args)
+      Engine::Base.allocate.searchable?(*args)
     end
   end
 end
