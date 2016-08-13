@@ -53,6 +53,17 @@ describe InsensitiveSearch do
             'to return an instance of Array',
             4
       end
+
+      context 'where singular thing exists' do
+        subject { described_class.run(path_source) }
+
+        include_context \
+            'relative path which is found singular thing'
+
+        it_behaves_like \
+            'to return an instance of Array',
+            1
+      end
     end
 
     context 'when passed a nil' do
