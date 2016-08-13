@@ -1,4 +1,4 @@
-shared_context 'relative path in the sample file structure' do
+shared_context 'relative path which is found plural things' do
   before {
     Dir.chdir(File.expand_path('../relative_root', __FILE__))
   }

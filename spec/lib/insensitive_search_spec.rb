@@ -47,7 +47,7 @@ describe InsensitiveSearch do
         subject { described_class.run(path_source) }
 
         include_context \
-            'relative path in the sample file structure'
+            'relative path which is found plural things'
 
         it_behaves_like \
             'to return an instance of Array',
