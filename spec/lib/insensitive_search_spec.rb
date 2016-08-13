@@ -66,15 +66,17 @@ describe InsensitiveSearch do
       end
     end
 
-    context 'when passed a relative path of existence' do
-      subject { described_class.run(path_source) }
+    context 'when passed a relative path' do
+      context 'where plural files and directories exist' do
+        subject { described_class.run(path_source) }
 
-      include_context \
-          'relative path in the sample file structure'
+        include_context \
+            'relative path in the sample file structure'
 
-      it_behaves_like \
-          'to return an instance of Array',
-          4
+        it_behaves_like \
+            'to return an instance of Array',
+            4
+      end
     end
 
     context 'when passed a nil' do
