@@ -16,6 +16,13 @@ module InsensitiveSearch
       run(*args, **options)
     end
 
+    def file(*args, **options)
+      options[:directory] = false
+      options[:file] = true
+
+      run(*args, **options)
+    end
+
     def run(*args, **options)
       new(**options).search(*args)
     end
