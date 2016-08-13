@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'insensitive_load/version'
+require 'insensitive_search/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "insensitive_load"
-  spec.version       = InsensitiveLoad::VERSION
+  spec.name          = "insensitive_search"
+  spec.version       = InsensitiveSearch::VERSION
   spec.authors       = ["indeep-xyz"]
   spec.email         = ["indeep.xyz@gmail.com"]
 
