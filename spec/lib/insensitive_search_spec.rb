@@ -23,6 +23,12 @@ describe InsensitiveSearch do
     end
   end
 
+  describe 'VERSION' do
+    it 'has a version number' do
+      expect(described_class::VERSION).not_to be nil
+    end
+  end
+
   describe '.run' do
     context 'when passed a relative path of existence' do
       subject { described_class.run(path_source) }
