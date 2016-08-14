@@ -4,16 +4,6 @@ module InsensitiveSearch
   module Engine
     class Linux < Base
       # - - - - - - - - - - - - - - - - - -
-      # error
-
-      DirectoryPathError = Class.new(::ArgumentError) do
-        def initialize(dir_path)
-          message = 'The directory path "%s" does not exist.' % dir_path
-          super(message)
-        end
-      end
-
-      # - - - - - - - - - - - - - - - - - -
       # search
 
       def search(path_source)
@@ -48,7 +38,7 @@ module InsensitiveSearch
       def in_dir(dir_path)
         if dir_path.size > 0
           if not File.directory?(dir_path)
-            fail DirectoryPathError.new(dir_path)
+            return []
           end
 
           dir_path = "#{dir_path}/".sub(/\/+$/, '/')
