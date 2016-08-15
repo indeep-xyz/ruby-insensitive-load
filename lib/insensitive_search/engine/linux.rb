@@ -1,4 +1,5 @@
 require "insensitive_search/engine/base"
+require "insensitive_search/in_dir"
 
 module InsensitiveSearch
   module Engine
@@ -18,13 +19,9 @@ module InsensitiveSearch
       private
 
       def search_loop(parts, prefix = '')
-        objective_path = join_path(prefix, parts[0])
+        list = in_dir(prefix, parts[0])
 
-        in_dir(prefix).inject([]) do |result, path|
-          if not insensitive_match?(path, objective_path)
-            next result
-          end
-
+        list.inject([]) do |result, path|
           if parts.size > 1
             result |= search_loop(parts[1..-1], path)
           elsif @filter.ok?(path)
@@ -35,26 +32,8 @@ module InsensitiveSearch
         end
       end
 
-      def in_dir(dir_path)
-        if dir_path.size > 0
-          if not File.directory?(dir_path)
-            return []
-          end
-
-          dir_path = "#{dir_path}/".sub(/\/+$/, '/')
-        end
-
-        Dir.glob("#{dir_path}*")
-      end
-
-      def insensitive_match?(a, b)
-        a.downcase == b.downcase
-      end
-
-      def join_path(prefix, addition)
-        prefix.size < 1 \
-            ? addition
-            : File.join(prefix, addition)
+      def in_dir(dir, filename)
+        InDir.new(dir).selected_list(filename)
       end
     end
   end
