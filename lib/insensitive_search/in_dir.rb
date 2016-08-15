@@ -5,7 +5,7 @@ module InsensitiveSearch
         :dir
 
     # - - - - - - - - - - - - - - - - - -
-    # initializem, set
+    # initialize
 
     def initialize(dir)
       @dir = dir
