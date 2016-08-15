@@ -15,15 +15,15 @@ module InsensitiveSearch
     # list paths in @dir
 
     def list
-      if @dir.size > 0
+      if @dir == ''
+        Dir.glob('*')
+      else
         if File.directory?(@dir)
           dir = @dir.sub(/\/*$/, '/')
           Dir.glob("#{dir}*")
         else
           []
         end
-      else
-        Dir.glob('*')
       end
     end
 
