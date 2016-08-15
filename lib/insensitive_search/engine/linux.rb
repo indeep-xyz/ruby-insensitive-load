@@ -16,6 +16,13 @@ module InsensitiveSearch
 
       private
 
+      # Start insensitive searching on Linux.
+      #
+      # The branch depends on whether
+      # the argument as path is absolute or relative.
+      #
+      # @param [Array] parts the source for searching
+      # @return [Array] search result
       def search_start(parts)
         parts[0] == '' \
             ? search_loop(parts[1..-1], '/')
