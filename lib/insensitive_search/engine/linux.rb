@@ -9,14 +9,18 @@ module InsensitiveSearch
 
       def search(path_source)
         guard(path_source)
-        parts = path_source.split(@delimiter)
 
+        parts = path_source.split(@delimiter)
+        search_start(parts)
+      end
+
+      private
+
+      def search_start(parts)
         parts[0] == '' \
             ? search_loop(parts[1..-1], '/')
             : search_loop(parts)
       end
-
-      private
 
       def search_loop(parts, prefix = '')
         list = in_dir(prefix, parts[0])
