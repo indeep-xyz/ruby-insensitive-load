@@ -38,7 +38,7 @@ module InsensitiveSearch
     private
 
     def create_objective_path(filename)
-      @dir.size < 1 \
+       @dir == '' \
           ? filename
           : File.join(@dir, filename)
     end
