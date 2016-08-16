@@ -42,6 +42,11 @@ module InsensitiveSearch
         end
       end
 
+      # List up paths matched insensitively by InDir.
+      #
+      # @param [String] dir the directory path
+      # @param [String] filename the file name
+      # @return [Array] matched paths
       def search_in_dir(dir, filename)
         InDir.new(dir).selected_list(filename)
       end
