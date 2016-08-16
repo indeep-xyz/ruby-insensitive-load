@@ -29,7 +29,7 @@ module InsensitiveSearch
       end
 
       def search_loop(parts, prefix = '')
-        list = in_dir(prefix, parts[0])
+        list = search_in_dir(prefix, parts[0])
 
         list.inject([]) do |result, path|
           if parts.size > 1
@@ -42,7 +42,7 @@ module InsensitiveSearch
         end
       end
 
-      def in_dir(dir, filename)
+      def search_in_dir(dir, filename)
         InDir.new(dir).selected_list(filename)
       end
     end
