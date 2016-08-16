@@ -9,9 +9,7 @@ module InsensitiveSearch
 
       def search(path_source)
         guard(path_source)
-
-        parts = path_source.split(@delimiter)
-        search_start(parts)
+        search_start(path_source)
       end
 
       private
@@ -21,9 +19,10 @@ module InsensitiveSearch
       # The branch depends on whether
       # the argument as path is absolute or relative.
       #
-      # @param [Array] parts the source for searching
+      # @param [String] path_source the source for searching
       # @return [Array] search result
-      def search_start(parts)
+      def search_start(path_source)
+        parts = path_source.split(@delimiter)
         parts[0] == '' \
             ? search_loop(parts[1..-1], '/')
             : search_loop(parts)
