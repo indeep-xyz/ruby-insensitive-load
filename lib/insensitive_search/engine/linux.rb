@@ -21,13 +21,13 @@ module InsensitiveSearch
 
       private
 
-      # Start insensitive searching on Linux.
+      # Start insensitive searching.
       #
       # The branch depends on whether
       # the argument as path is absolute or relative.
       #
       # @param [String] path_source the source for searching
-      # @return [Array] search result
+      # @return [Array] matched and filtered paths
       def search_start(path_source)
         parts = path_source.split(@delimiter)
         parts[0] == '' \
