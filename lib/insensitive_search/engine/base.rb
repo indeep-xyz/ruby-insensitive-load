@@ -19,6 +19,21 @@ module InsensitiveSearch
       end
 
       # - - - - - - - - - - - - - - - - - -
+      # search
+
+      # Search path with an argument.
+      #
+      # The return value comes by matching
+      # the argument with the objective path insensitively.
+      #
+      # @param [String] path_source the path for matching insensitively
+      # @return [Array] matched and filtered paths
+      def search(path_source)
+        guard(path_source)
+        search_start(path_source)
+      end
+
+      # - - - - - - - - - - - - - - - - - -
       # validate
 
       def guard(object)

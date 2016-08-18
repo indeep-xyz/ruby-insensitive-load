@@ -3,13 +3,9 @@ require "insensitive_search/engine/base"
 module InsensitiveSearch
   module Engine
     class Windows < Base
+      private
 
-      # - - - - - - - - - - - - - - - - - -
-      # search
-
-      def search(path)
-        guard(path_source)
-
+      def search_start(path)
         File.exist?(path) \
             && @filter.ok?(path) ? [path] : []
       end
