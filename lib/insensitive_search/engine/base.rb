@@ -40,6 +40,15 @@ module InsensitiveSearch
         searchable?(object, errorable: true)
       end
 
+      # Check whether the argument is searchable string.
+      #
+      # @raise [PathSourceError]
+      #   the object is not searchable and option[:errorable] is true
+      #
+      # @param object [Object] the object which checked to be whether searchable
+      # @option [Boolean] :errorable can raise an error when it is true
+      # @return [FalseClass] the object is not searchable
+      # @return [TrueClass] the object is searchable
       def searchable?(
           object,
           errorable: false)
