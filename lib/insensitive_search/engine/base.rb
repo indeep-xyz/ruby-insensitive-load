@@ -65,6 +65,11 @@ module InsensitiveSearch
       # - - - - - - - - - - - - - - - - - -
       # validate
 
+      # Raise error
+      # when the parameters are wrong for search.
+      #
+      # @param object [Object] the object which checked to be whether searchable
+      # @return [TrueClass] there are no wrong parameters
       def guard(object)
         searchable?(object, errorable: true)
       end
