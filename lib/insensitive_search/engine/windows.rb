@@ -13,8 +13,8 @@ module InsensitiveSearch
       # On the Windows environment,
       # its way of resolving path is insensitive.
       #
-      # @param [String] path the path
-      # @return [Array] matched and filtered paths
+      # @param path [String] the path
+      # @return [Array<String>] matched and filtered paths
       def search_start(path)
         File.exist?(path) \
             && @filter.ok?(path) ? [path] : []
