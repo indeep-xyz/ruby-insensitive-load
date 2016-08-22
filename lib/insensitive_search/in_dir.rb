@@ -36,6 +36,11 @@ module InsensitiveSearch
 
     private
 
+    # Optimize the directory path for @dir.
+
+    # @param dir [Object] the object
+    # @return [String] the object is an available directory path or an empty string
+    # @return [NilClass] the object is unsuitable to @dir
     def optimize_dir(dir)
       if dir.kind_of?(String)
         if dir == ''
