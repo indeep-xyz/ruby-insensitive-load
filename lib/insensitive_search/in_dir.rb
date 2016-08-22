@@ -5,25 +5,24 @@ module InsensitiveSearch
         :dir
 
     # - - - - - - - - - - - - - - - - - -
-    # initialize
+    # initialize, set
 
     def initialize(dir)
-      @dir = dir
+      self.dir = dir
+    end
+
+    def dir=(dir)
+      @dir = optimize_dir(dir)
     end
 
     # - - - - - - - - - - - - - - - - - -
     # list paths in @dir
 
     def list
-      if @dir == ''
-        Dir.glob('*')
+      if @dir.nil?
+        []
       else
-        if File.directory?(@dir)
-          dir = @dir.sub(/\/*$/, '/')
-          Dir.glob("#{dir}*")
-        else
-          []
-        end
+        Dir.glob("#{@dir}*")
       end
     end
 
@@ -37,10 +36,26 @@ module InsensitiveSearch
 
     private
 
+    def optimize_dir(dir)
+      if dir.kind_of?(String)
+        if dir == ''
+          return ''
+        elsif File.directory?(dir)
+          return dir.sub(/\/*$/, '/')
+        end
+      end
+
+      nil
+    end
+
     def create_objective_path(filename)
-       @dir == '' \
-          ? filename
-          : File.join(@dir, filename)
+       if @dir.nil?
+         nil
+       elsif @dir == ''
+         filename
+       else
+         File.join(@dir, filename)
+       end
     end
 
     def insensitive_match?(a, b)
