@@ -53,6 +53,11 @@ module InsensitiveSearch
       nil
     end
 
+    # Create a path for matching.
+    #
+    # @param filename [String] the filename
+    # @return [String] a path derived from filename and @dir
+    # @return [NilClass] when @dir is nil
     def create_objective_path(filename)
        if @dir.nil?
          nil
