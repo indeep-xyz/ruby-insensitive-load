@@ -68,6 +68,13 @@ module InsensitiveSearch
        end
     end
 
+    # Check whether the arguments
+    # are the same string in insensitive.
+    #
+    # @param a [String] the object for comparison
+    # @param b [String] the object for comparison
+    # @return [FalseClass] not matched
+    # @return [TrueClass] matched
     def insensitive_match?(a, b)
       a.downcase == b.downcase
     end
