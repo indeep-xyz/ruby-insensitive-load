@@ -18,6 +18,9 @@ module InsensitiveSearch
     # - - - - - - - - - - - - - - - - - -
     # list paths in @dir
 
+    # List up file paths in @dir.
+    #
+    # @return [Array<String>] paths found in @dir
     def list
       if @dir.nil?
         []
