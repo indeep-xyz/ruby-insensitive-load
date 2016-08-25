@@ -29,6 +29,13 @@ module InsensitiveSearch
       end
     end
 
+    # Select paths matched insensitively
+    # from the listed paths by the method "list".
+    # The string for matching is prepared by
+    # joining @dir and the argument.
+    #
+    # @param filename [String] the filename
+    # @return [Array<String>] paths found and selected
     def selected_list(filename)
       objective_path = create_objective_path(filename)
 
