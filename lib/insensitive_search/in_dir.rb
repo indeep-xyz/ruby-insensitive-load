@@ -11,6 +11,12 @@ module InsensitiveSearch
       self.dir = dir
     end
 
+    # Assign a directory path to @dir.
+    # The path is optimized by another method.
+    #
+    # @param dir [String] the directory path for existence
+    # @return [String] @dir
+    # @return [NilClass] @dir (the argument is unsuitable)
     def dir=(dir)
       @dir = optimize_dir(dir)
     end
