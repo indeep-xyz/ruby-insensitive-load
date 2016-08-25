@@ -7,6 +7,10 @@ module InsensitiveSearch
     # - - - - - - - - - - - - - - - - - -
     # initialize, set
 
+    # Initialize me.
+    #
+    # @param dir [String] the directory path for existence
+    # @return [InDir] an instance
     def initialize(dir)
       self.dir = dir
     end
