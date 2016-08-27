@@ -11,6 +11,10 @@ module InsensitiveSearch
         set_options(**options)
       end
 
+      # Set instance variables collectively.
+      #
+      # @param options [Hash] the keyword-argument for initialization of Filter
+      # @option [String] :delimiter the delimiter for path
       def set_options(
           delimiter: DEFAULT_DELIMITER,
           **options)
