@@ -7,6 +7,9 @@ module InsensitiveSearch
       # - - - - - - - - - - - - - - - - - -
       # initialize
 
+      # Initialize me.
+      #
+      # @param options [Hash] the keyword-argument passed to the method "set_options"
       def initialize(**options)
         set_options(**options)
       end
