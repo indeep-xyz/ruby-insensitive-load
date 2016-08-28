@@ -3,6 +3,12 @@ require "insensitive_search/engine/filter"
 
 module InsensitiveSearch
   module Engine
+
+    # This class is foundation of the features
+    # which search file insensitively.
+    #
+    # @author indeep-xyz
+    # @abstract
     class Base
       # - - - - - - - - - - - - - - - - - -
       # initialize
