@@ -1,5 +1,11 @@
 
 module InsensitiveSearch
+
+  # List file paths in directory.
+  # Some methods work in insensitive.
+  #
+  # @author indeep-xyz
+  # @attr_reader dir [String] the directory path for existence
   class InDir
     attr_reader \
         :dir
