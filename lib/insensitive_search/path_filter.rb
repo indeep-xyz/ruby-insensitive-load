@@ -1,5 +1,10 @@
 module InsensitiveSearch
   class PathFilter
+
+    # Initialize me.
+    #
+    # @option [Boolean] :directory if true, accept directory path at validation.
+    # @option [Boolean] :file if true, accept file path at validation.
     def initialize(
         directory: true,
         file: true)
