@@ -1,5 +1,5 @@
 require "insensitive_search/engine"
-require "insensitive_search/engine/filter"
+require "insensitive_search/path_filter"
 
 module InsensitiveSearch
   module Engine
@@ -28,7 +28,7 @@ module InsensitiveSearch
           delimiter: DEFAULT_DELIMITER,
           **options)
         @delimiter = delimiter
-        @filter = Filter.new(**options)
+        @filter = PathFilter.new(**options)
       end
 
       # - - - - - - - - - - - - - - - - - -
