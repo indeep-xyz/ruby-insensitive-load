@@ -15,6 +15,11 @@ module InsensitiveSearch
     # - - - - - - - - - - - - - - - - - -
     # validate
 
+    # Check whether the path passes through my filter.
+    #
+    # @option path [String] the path
+    # @return [TrueClass] the argument is passed
+    # @return [FalseClass] the argument is failed
     def ok?(path)
       @directory && @file \
           || valid_directory?(path) \
