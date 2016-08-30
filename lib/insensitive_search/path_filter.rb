@@ -26,6 +26,12 @@ module InsensitiveSearch
           || valid_file?(path)
     end
 
+    # Check whether the path passes through my filter.
+    # The result is the opposite value of the method "ok?".
+    #
+    # @option path [String] the path
+    # @return [TrueClass] the argument is failed
+    # @return [FalseClass] the argument is passed
     def ng?(path)
       !ok?(path)
     end
