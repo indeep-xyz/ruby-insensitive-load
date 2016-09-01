@@ -48,6 +48,11 @@ module InsensitiveSearch
           && File.directory?(path)
     end
 
+    # Check whether the path is an exist directory.
+    #
+    # @option path [String] the path
+    # @return [TrueClass] the argument is passed and @file is true
+    # @return [FalseClass] the argument is failed
     def valid_file?(path)
       @file \
           && File.file?(path)
