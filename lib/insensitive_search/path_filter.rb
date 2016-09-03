@@ -1,4 +1,9 @@
 module InsensitiveSearch
+
+  # Filter path by the rule configured
+  # at initialization.
+  #
+  # @author indeep-xyz
   class PathFilter
 
     # Initialize me.
