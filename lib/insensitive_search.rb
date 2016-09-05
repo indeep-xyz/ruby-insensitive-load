@@ -25,8 +25,10 @@ module InsensitiveSearch
 
     # Run searching.
     #
-    # @param *args [argument-list] options for Engine#search
-    # @param **options [keyword-argument] options for Engine#new
+    # @param *args [argument-list] options for searching
+    # @param **options [keyword-argument] options for creating an engine
+    # @see #new
+    # @see Engine::Base#search
     def run(*args, **options)
       new(**options).search(*args)
     end
