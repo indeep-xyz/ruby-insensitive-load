@@ -33,6 +33,12 @@ module InsensitiveSearch
       new(**options).search(*args)
     end
 
+    # Check whether the argument is seachable string.
+    #
+    # @param *args [argument-list] object for checking
+    # @return [FalseClass] the object is not searchable
+    # @return [TrueClass] the object is searchable
+    # @see Engine::Base#searchable?
     def searchable?(*args)
       Engine::Base.allocate.searchable?(*args)
     end
