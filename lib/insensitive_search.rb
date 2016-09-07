@@ -9,6 +9,14 @@ module InsensitiveSearch
           : Engine::Linux.new(**options)
     end
 
+    # Search directory paths.
+    #
+    # Some parameters of the keyword-argument are
+    # overwrited by this method.
+    #
+    # @param *args [argument-list] options for searching
+    # @param **options [keyword-argument] options for creating an engine
+    # @see  #run
     def dir(*args, **options)
       options[:directory] = true
       options[:file] = false
