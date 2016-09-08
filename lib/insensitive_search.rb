@@ -24,6 +24,14 @@ module InsensitiveSearch
       run(*args, **options)
     end
 
+    # Search file paths.
+    #
+    # Some parameters of the keyword-argument are
+    # overwrited by this method.
+    #
+    # @param *args [argument-list] options for searching
+    # @param **options [keyword-argument] options for creating an engine
+    # @see  #run
     def file(*args, **options)
       options[:directory] = false
       options[:file] = true
