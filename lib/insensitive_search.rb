@@ -3,6 +3,13 @@ require "insensitive_search/engine/windows"
 
 module InsensitiveSearch
   class << self
+    # Create a kind of Engine
+    # depending on the running OS.
+    #
+    # @param **options [keyword-argument] options for creating an engine
+    # @return an instance of Engine which is Engine::Windows or Engine::Linux
+    # @see  Engine::Windows
+    # @see  Engine::Linux
     def new(**options)
       Gem.win_platform? \
           ? Engine::Windows.new(**options)
