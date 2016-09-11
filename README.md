@@ -48,12 +48,15 @@ Search only file paths.
 Sample
 ----
 
+Running the method with the argument "ext/soFTwaRe/Config.conf" in the following file structure, the instance of Array on each methods is returned.
+
+The working dir is at "root".
+
 ### file structure (Linux)
 
 ~~~
 root/
 ├── ext/
-│   ├── onLY_oNe.tXT
 │   ├── softWARE
 │   └── SOFTware/
 │       ├── config.conf
@@ -66,8 +69,6 @@ root/
 
 ### InsensitiveSearch.run
 
-Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the followings.
-
 ~~~
 [ "ext/SOFTware/config.conf",
   "ext/SOFTware/Config.CONF",
@@ -77,15 +78,11 @@ Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the 
 
 ### InsensitiveSearch.dir
 
-Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the followings.
-
 ~~~
 [ "ext/SOFTware/Config.CONF" ]
 ~~~
 
 ### InsensitiveSearch.file
-
-Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the followings.
 
 ~~~
 [ "ext/SOFTware/config.conf",
