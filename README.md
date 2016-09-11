@@ -1,41 +1,104 @@
-# InsensitiveLoad
+InsensitiveSearch
+====
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/insensitive_load`. To experiment with that code, run `bin/console` for an interactive prompt.
+Search paths in insensitive.
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
+Installation
+----
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'insensitive_load'
+gem 'insensitive_search'
 ```
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install insensitive_load
+```bash
+$ gem install insensitive_search
+```
 
-## Usage
+Usage
+----
 
-TODO: Write usage instructions here
+It has some searching methods, and all their return value is definitely an array. The array can include the paths which matched with the path argument.
 
-## Development
+Running on Linux, the size of the array is 0 or equal to or greater than 1. 
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Running on Windows, the size of the array is 0 or equal to 1.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### `InsensitiveSearch.run(path)`
 
-## Contributing
+Search paths.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/insensitive_load.
+### `InsensitiveSearch.dir(path)`
 
+Search only dirctory paths.
 
-## License
+### `InsensitiveSearch.file(path)`
+
+Search only file paths.
+
+Sample
+----
+
+### file structure (Linux)
+
+~~~
+root/
+├── ext/
+│   ├── onLY_oNe.tXT
+│   ├── softWARE
+│   └── SOFTware/
+│       ├── config.conf
+│       ├── cONfig.conf
+│       └── Config.CONF/
+└── EXT/
+    └── software/
+        └── COnFIG.CONf
+~~~
+
+### InsensitiveSearch.run
+
+Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the followings.
+
+~~~
+[ "ext/SOFTware/config.conf",
+  "ext/SOFTware/Config.CONF",
+  "ext/SOFTware/cONfig.conf",
+  "EXT/software/COnFIG.CONf" ]
+~~~
+
+### InsensitiveSearch.dir
+
+Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the followings.
+
+~~~
+[ "ext/SOFTware/Config.CONF" ]
+~~~
+
+### InsensitiveSearch.file
+
+Running the method with the argument "ext/soFTwaRe/Config.conf", it returns the followings.
+
+~~~
+[ "ext/SOFTware/config.conf",
+  "ext/SOFTware/cONfig.conf",
+  "EXT/software/COnFIG.CONf" ]
+~~~
+
+Contributing
+----
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/indeep-xyz/ruby-insensitive-search.
+
+License
+---
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
