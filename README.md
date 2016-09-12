@@ -27,7 +27,7 @@ $ gem install insensitive_search
 Usage
 ----
 
-It has some searching methods, and all their return value is definitely an array. The array can include the paths which matched with the path argument.
+This gem has some searching methods, and all their return value is definitely an array. The array can include the paths which matched with the path argument.
 
 Running on Linux, the size of the array is 0 or equal to or greater than 1. 
 
