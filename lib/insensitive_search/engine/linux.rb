@@ -3,6 +3,11 @@ require "insensitive_search/in_dir"
 
 module InsensitiveSearch
   module Engine
+
+    # This class searches on Linux
+    # insensitively.
+    #
+    # @author indeep-xyz
     class Linux < Base
       private
 
